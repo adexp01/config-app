@@ -776,15 +776,17 @@ const Config = () => {
                             selectedOption={configState.label.headerIcon}
                             onChange={handleChange}
                           />
-                          <button
-                            className="btn btn-primary submit-btn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              nextStep();
-                            }}
-                          >
-                            Next step
-                          </button>
+                          <div className="submit-section">
+                            <button
+                              className="btn btn-primary submit-btn"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                nextStep();
+                              }}
+                            >
+                              Next step
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -1151,15 +1153,17 @@ const Config = () => {
                             />
                           </div>
                         </div>
-                        <button
-                          className="btn btn-primary submit-btn"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            nextStep();
-                          }}
-                        >
-                          Next step
-                        </button>
+                        <div className="submit-section">
+                          <button
+                            className="btn btn-primary submit-btn"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              nextStep();
+                            }}
+                          >
+                            Next step
+                          </button>
+                        </div>
                       </>
                     )}
                     {selectedRow && showEditModal && step === 2 && (
