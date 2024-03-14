@@ -544,7 +544,6 @@ const Config = () => {
                           value={configState.image}
                         />
                         <div>
-                          Packshots per SKU
                           <InputField
                             type={"text"}
                             name={"image"}
@@ -985,7 +984,6 @@ const Config = () => {
                               value={selectedRow.image}
                             />
                             <div>
-                              Packshots per SKU
                               <InputField
                                 type={"text"}
                                 name={"image"}

@@ -29,29 +29,18 @@ const EmployeeProfile = ({ selectedRow }) => {
   });
   return (
     <>
-      <div className="page-wrapper">
+      <div className="page-wrapper" style={{ padding: 0 }}>
         <Helmet>
           <meta name="description" content="Reactify Blank Page" />
         </Helmet>
         {/* Page Content */}
-        <div className="content container-fluid">
-          <div className="tab-content">
+        <div
+          className="content container-fluid"
+          style={{ padding: "0px 30px 30px 30px " }}
+        >
+          <div className="tab-content" style={{ paddingTop: 0 }}>
             {/* Profile Info Tab */}
-            {selectedRow && (
-              <div
-                style={{
-                  margin: "20px",
-                  backgroundColor: "#f0f0f0",
-                  padding: "20px",
-                  borderRadius: "10px",
-                }}
-              >
-                <h3>Selected Configuration</h3>
-                <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
-                  {JSON.stringify(selectedRow, null, 2)}
-                </pre>
-              </div>
-            )}
+
             {selectedRow && (
               <div
                 id="emp_profile"
@@ -66,6 +55,19 @@ const EmployeeProfile = ({ selectedRow }) => {
                           <li>
                             <div className="title">Layout</div>
                             <div className="text">{selectedRow.layout}</div>
+                          </li>
+
+                          <li>
+                            <div className="title">Sorting</div>
+                            <div className="text">
+                              {selectedRow.sorting.join(", ")}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">SortingPreferred</div>
+                            <div className="text">
+                              {selectedRow.sortingPrefered}
+                            </div>
                           </li>
                           <li>
                             <div className="title">Ratings Enabled</div>
@@ -146,6 +148,36 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
+                            <div className="title">posBranding</div>
+                            <div className="text">
+                              {selectedRow.posBranding}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">layoutOffline</div>
+                            <div className="text">
+                              {selectedRow.layoutOffline}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Price</div>
+                            <div className="text">
+                              {selectedRow.price ? "Yes" : "No"}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Stock</div>
+                            <div className="text">
+                              {selectedRow.stock ? "Yes" : "No"}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Pagination</div>
+                            <div className="text">
+                              {selectedRow.pagination ? "Yes" : "No"}
+                            </div>
+                          </li>
+                          <li>
                             <div className="title">Logo Width</div>
                             <div className="text">
                               {selectedRow.brand.logoFormat.width}
@@ -186,6 +218,9 @@ const EmployeeProfile = ({ selectedRow }) => {
                           Sponsored Merchants:{" "}
                           {selectedRow.merchantsSponsored.join(", ")}
                         </div>
+                        <div className="text">
+                          Merchants: {selectedRow.merchants.join(", ")}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -196,7 +231,13 @@ const EmployeeProfile = ({ selectedRow }) => {
                     <div className="card profile-box flex-fill">
                       <div className="card-body">
                         <h3 className="card-title">Images</h3>
-                        <ul>
+                        <ul
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "10px",
+                          }}
+                        >
                           {selectedRow.images.map((img, index) => (
                             <li key={index}>
                               <img
@@ -204,10 +245,14 @@ const EmployeeProfile = ({ selectedRow }) => {
                                 alt={`Image ${index + 1}`}
                                 style={{ width: "75px", height: "75px" }}
                               />
-                              {img.imageFormat && (
-                                <span>
+                              {img.imageFormat ? (
+                                <span style={{ paddingLeft: "10px" }}>
                                   Format: {img.imageFormat.width}x
                                   {img.imageFormat.height}
+                                </span>
+                              ) : (
+                                <span style={{ paddingLeft: "10px" }}>
+                                  Format: none
                                 </span>
                               )}
                             </li>
@@ -1137,6 +1182,21 @@ const EmployeeProfile = ({ selectedRow }) => {
           </div>
         </div>
         {/* /Experience Modal */}
+        {selectedRow && (
+          <div
+            style={{
+              margin: "20px",
+              backgroundColor: "#f0f0f0",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <h3>Selected Configuration</h3>
+            <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+              {JSON.stringify(selectedRow, null, 2)}
+            </pre>
+          </div>
+        )}
       </div>
     </>
   );

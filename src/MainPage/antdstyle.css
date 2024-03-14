@@ -244,3 +244,7 @@ td.ant-table-column-sort {
 .custom-control-label {
   padding-left: 10px;
 }
+.modal-body {
+  overflow-y: scroll !important;
+  height: 85vh;
+}
