@@ -228,14 +228,13 @@ td.ant-table-column-sort {
   overflow-y: scroll !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: 300px;
+  height: 100%;
 }
 
 .create-config-wrapper {
   overflow-y: scroll !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: 500px;
 }
 [data-layout="vertical"] .sidebar > div > div {
   overflow-y: hidden !important;
