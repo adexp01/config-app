@@ -228,7 +228,7 @@ td.ant-table-column-sort {
   overflow-y: scroll !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: 150px;
+  height: 300px;
 }
 
 .create-config-wrapper {

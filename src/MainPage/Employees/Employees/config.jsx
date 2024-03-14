@@ -29,11 +29,16 @@ const Config = () => {
   const [configState, setConfigState] = useState(emptyConfig);
   const [selectedRow, setSelectedRow] = useState(null);
   const [skuData, setSkuData] = useState({ image: "", sku: "" });
+  const [showMerchants, setShowMerchants] = useState(false);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+
+  const toggleMerchants = () => {
+    setShowMerchants(!showMerchants);
+  };
 
   useEffect(() => {
     if (searchQuery.length === 0) {
@@ -742,14 +747,18 @@ const Config = () => {
                       </div>
                     </div>
 
-                    <div className="merchant-wrapper">
-                      <Table
-                        dataSource={merchantsList}
-                        columns={merchantColumns}
-                        rowKey="id"
-                        pagination={false}
-                      />
-                    </div>
+                    {showMerchants && (
+                      <div className="merchant-wrapper">
+                        <Table
+                          dataSource={merchantsList}
+                          columns={merchantColumns}
+                          rowKey="id"
+                          pagination={false}
+                          sticky={true}
+                        />
+                      </div>
+                    )}
+
                     <div className="submit-section">
                       <button
                         className="btn btn-primary submit-btn"
@@ -761,6 +770,16 @@ const Config = () => {
                         }}
                       >
                         Submit
+                      </button>
+                      <button
+                        className="btn btn-primary submit-btn"
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          toggleMerchants();
+                        }}
+                      >
+                        Manage merchants
                       </button>
                     </div>
                   </form>
@@ -1078,12 +1097,17 @@ const Config = () => {
                           </div>
                         </div>
 
-                        <Table
-                          dataSource={merchantsList}
-                          columns={merchantColumnsEdit}
-                          rowKey="id"
-                          pagination={false}
-                        />
+                        {showMerchants && (
+                          <div className="merchant-wrapper">
+                            <Table
+                              dataSource={merchantsList}
+                              columns={merchantColumnsEdit}
+                              rowKey="id"
+                              pagination={false}
+                              sticky={true}
+                            />
+                          </div>
+                        )}
                       </>
                     )}
                     <div className="submit-section">
@@ -1097,6 +1121,16 @@ const Config = () => {
                         }}
                       >
                         Save
+                      </button>
+                      <button
+                        className="btn btn-primary submit-btn"
+                        onClick={(e) => {
+                          e.preventDefault();
+
+                          toggleMerchants();
+                        }}
+                      >
+                        Manage merchants
                       </button>
                     </div>
                   </form>

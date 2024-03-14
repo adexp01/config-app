@@ -4015,6 +4015,9 @@ input[type="file"].form-control {
   margin-top: 40px;
   float: left;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 @media (max-width: 575px) {
   .submit-section {
@@ -10858,8 +10861,8 @@ button.close {
   cursor: pointer;
   margin-right: 1px;
   position: absolute;
-    top: 43.3%;
-    right: 38%;
+  top: 43.3%;
+  right: 38%;
 }
 .draft {
   margin-right: 3px;
