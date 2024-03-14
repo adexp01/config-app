@@ -53,8 +53,35 @@ const EmployeeProfile = ({ selectedRow }) => {
                         <h3 className="card-title">Configuration Details</h3>
                         <ul className="personal-info">
                           <li>
-                            <div className="title">Layout</div>
-                            <div className="text">{selectedRow.layout}</div>
+                            <div className="title">
+                              Tab Label Offline/Online
+                            </div>
+                            <div className="text">
+                              {selectedRow.label.grouping === 1
+                                ? " Online/Offline"
+                                : "Online-Apotheken/ Apotheken"}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Tab Label Visibility</div>
+                            <div className="text">
+                              {String(selectedRow.label.header)}
+                            </div>
+                          </li>
+
+                          <li>
+                            <div className="title">
+                              Tab Label Icon Visibility
+                            </div>
+                            <div className="text">
+                              {String(selectedRow.label.headerIcon)}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Selection of the layout</div>
+                            <div className="text">
+                              {selectedRow.layout === 1 ? "Inline" : "Pop Up"}
+                            </div>
                           </li>
 
                           <li>
@@ -64,19 +91,29 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">SortingPreferred</div>
+                            <div className="title">Prefered sorting</div>
                             <div className="text">
-                              {selectedRow.sortingPrefered}
+                              {selectedRow.sortingPrefered === 1
+                                ? "Partner"
+                                : "Preferred merchants"}
                             </div>
                           </li>
                           <li>
-                            <div className="title">Ratings Enabled</div>
+                            <div className="title">
+                              Position of sku selector
+                            </div>
+                            <div className="text">
+                              {selectedRow.layoutMultiselect}
+                            </div>
+                          </li>
+                          <li>
+                            <div className="title">Show ratings</div>
                             <div className="text">
                               {selectedRow.ratings ? "Yes" : "No"}
                             </div>
                           </li>
                           <li>
-                            <div className="title">Primary Color</div>
+                            <div className="title">Color of the layout</div>
                             <div
                               className="text"
                               style={{ color: selectedRow.style.primaryColor }}
@@ -85,7 +122,7 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Button Color</div>
+                            <div className="title">Color of the buttons</div>
                             <div
                               className="text"
                               style={{ color: selectedRow.style.btnColor }}
@@ -94,7 +131,9 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Button Text Color</div>
+                            <div className="title">
+                              Color of the buttons text
+                            </div>
                             <div
                               className="text"
                               style={{ color: selectedRow.style.btnTextColor }}
@@ -103,7 +142,7 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Text Color</div>
+                            <div className="title">Color of the texts</div>
                             <div
                               className="text"
                               style={{ color: selectedRow.style.textColor }}
@@ -112,7 +151,9 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Header Text Color</div>
+                            <div className="title">
+                              Color of text in the header
+                            </div>
                             <div
                               className="text"
                               style={{
@@ -123,7 +164,7 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Z-Index</div>
+                            <div className="title">Layer priority</div>
                             <div className="text">
                               {selectedRow.style.zIndex}
                             </div>
@@ -148,25 +189,33 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">posBranding</div>
+                            <div className="title">
+                              Selection of POS branding
+                            </div>
                             <div className="text">
-                              {selectedRow.posBranding}
+                              {selectedRow.posBranding === 1
+                                ? "Round Icons "
+                                : "Logos"}
                             </div>
                           </li>
                           <li>
-                            <div className="title">layoutOffline</div>
+                            <div className="title">
+                              Selection layout offline merchants
+                            </div>
                             <div className="text">
-                              {selectedRow.layoutOffline}
+                              {selectedRow.layoutOffline === 1
+                                ? " no separation "
+                                : "tabed (online/offline)"}
                             </div>
                           </li>
                           <li>
-                            <div className="title">Price</div>
+                            <div className="title">Show price</div>
                             <div className="text">
                               {selectedRow.price ? "Yes" : "No"}
                             </div>
                           </li>
                           <li>
-                            <div className="title">Stock</div>
+                            <div className="title">Show availability</div>
                             <div className="text">
                               {selectedRow.stock ? "Yes" : "No"}
                             </div>
@@ -196,7 +245,7 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </div>
                           </li>
                           <li>
-                            <div className="title">Text</div>
+                            <div className="title">Offer more information</div>
                             <div className="text">{selectedRow.text}</div>
                           </li>
                         </ul>
@@ -210,16 +259,33 @@ const EmployeeProfile = ({ selectedRow }) => {
                     <div className="card profile-box flex-fill">
                       <div className="card-body">
                         <h3 className="card-title">Merchant Preferences</h3>
+
                         <div className="text">
-                          Preferred Merchants:{" "}
+                          <img src={selectedRow.image} width={80} height={80} />
+                          <span style={{ paddingLeft: "10px" }}>
+                            {" "}
+                            Packshot of the product
+                          </span>
+                        </div>
+                        <div className="text">
+                          Pefered merchants:{" "}
                           {selectedRow.merchantsPrefered.join(", ")}
                         </div>
                         <div className="text">
-                          Sponsored Merchants:{" "}
+                          Highlight merchants:{" "}
                           {selectedRow.merchantsSponsored.join(", ")}
                         </div>
                         <div className="text">
-                          Merchants: {selectedRow.merchants.join(", ")}
+                          Limit to specific merchants:{" "}
+                          {selectedRow.merchants
+                            .filter((item) => Number(item) > 0)
+                            .join(", ")}
+                        </div>
+                        <div className="text">
+                          Exclude merchants:{" "}
+                          {selectedRow.merchants
+                            .filter((item) => Number(item) < 0)
+                            .join(", ")}
                         </div>
                       </div>
                     </div>
@@ -230,7 +296,7 @@ const EmployeeProfile = ({ selectedRow }) => {
                   <div className="col-md-12 d-flex">
                     <div className="card profile-box flex-fill">
                       <div className="card-body">
-                        <h3 className="card-title">Images</h3>
+                        <h3 className="card-title">Packshots per SKU</h3>
                         <ul
                           style={{
                             display: "flex",
@@ -246,10 +312,16 @@ const EmployeeProfile = ({ selectedRow }) => {
                                 style={{ width: "75px", height: "75px" }}
                               />
                               {img.imageFormat ? (
-                                <span style={{ paddingLeft: "10px" }}>
-                                  Format: {img.imageFormat.width}x
-                                  {img.imageFormat.height}
-                                </span>
+                                <>
+                                  <span style={{ paddingLeft: "10px" }}>
+                                    Format: {img.imageFormat.width}x
+                                    {img.imageFormat.height}
+                                  </span>
+                                  <span style={{ paddingLeft: "10px" }}>
+                                    SKU: {img.sku ?? "none"}x
+                                    {img.imageFormat.height}
+                                  </span>
+                                </>
                               ) : (
                                 <span style={{ paddingLeft: "10px" }}>
                                   Format: none
