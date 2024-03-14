@@ -51,35 +51,21 @@ const Sidebar = (props) => {
                   <span>Main</span>
                 </li>
                 <li className="submenu">
-                  <a
-                    href="#"
-                    className={isSideMenu == "dashboard" ? "subdrop" : ""}
-                    onClick={() =>
-                      toggleSidebar(
-                        isSideMenu == "dashboard" ? "" : "dashboard"
-                      )
+                  <i className="la la-dashboard" />{" "}
+                  <Link
+                    className={
+                      pathname.includes("main/dashboard") ? "active" : ""
                     }
+                    to="/app/main/dashboard"
                   >
-                    <i className="la la-dashboard" /> <span> Dashboard</span>{" "}
-                    <span className="menu-arrow" />
-                  </a>
+                    Admin Dashboard
+                  </Link>
                   {isSideMenu == "dashboard" ? (
                     <ul
                       style={{
                         display: isSideMenu == "dashboard" ? "block" : "none",
                       }}
-                    >
-                      <li>
-                        <Link
-                          className={
-                            pathname.includes("main/dashboard") ? "active" : ""
-                          }
-                          to="/app/main/dashboard"
-                        >
-                          Admin Dashboard
-                        </Link>
-                      </li>
-                    </ul>
+                    ></ul>
                   ) : (
                     ""
                   )}
@@ -89,47 +75,14 @@ const Sidebar = (props) => {
                   <span>Config</span>
                 </li>
                 <li className="submenu">
-                  <a
-                    href="#"
-                    className={isSideMenu == "employee" ? "subdrop" : ""}
-                    onClick={() =>
-                      toggleSidebar(isSideMenu == "employee" ? "" : "employee")
-                    }
+                  <i className="la la-user" />{" "}
+                  <Link
+                    className={pathname.includes("config") ? "active" : ""}
+                    to="/app/employee/config"
                   >
-                    <i className="la la-user" />{" "}
-                    <span className="noti-dot"> Config list</span>{" "}
-                    <span className="menu-arrow" />
-                  </a>
-                  {isSideMenu == "employee" ? (
-                    <ul>
-                      <li>
-                        <Link
-                          className={
-                            pathname.includes("es-admin") ? "active" : ""
-                          }
-                          to="/app/employee/leaves-admin"
-                        >
-                          Leaves (Admin){" "}
-                          <span className="badge badge-pill bg-primary float-end">
-                            1
-                          </span>
-                        </Link>
-                      </li>
-
-                      <li>
-                        <Link
-                          className={
-                            pathname.includes("config") ? "active" : ""
-                          }
-                          to="/app/employee/config"
-                        >
-                          Configs
-                        </Link>
-                      </li>
-                    </ul>
-                  ) : (
-                    ""
-                  )}
+                    Configs
+                  </Link>
+                  {isSideMenu == "employee" ? <ul></ul> : ""}
                 </li>
                 <li className={pathname.includes("clients") ? "active" : ""}>
                   <Link to="/app/employees/clients">
@@ -145,7 +98,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-rocket" /> <span> Projects</span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "projects" ? (
                     <ul>
@@ -220,7 +172,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-files-o" /> <span> Sales </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "sales" ? (
                     <ul>
@@ -307,7 +258,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-files-o" /> <span> Accounting </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "accounting" ? (
                     <ul>
@@ -368,7 +318,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-money" /> <span> Payroll </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "payroll" ? (
                     <ul>
@@ -424,7 +373,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-pie-chart" /> <span> Reports </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "reports" ? (
                     <ul>
@@ -564,7 +512,7 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-graduation-cap" />{" "}
-                    <span> Performance </span> <span className="menu-arrow" />
+                    <span> Performance </span>
                   </a>
                   {isSideMenu == "performance" ? (
                     <ul>
@@ -615,7 +563,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-crosshairs" /> <span> Goals </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "goals" ? (
                     <ul>
@@ -655,7 +602,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-edit" /> <span> Training </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "training" ? (
                     <ul>
@@ -735,7 +681,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-briefcase" /> <span> Jobs </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "jobs" ? (
                     <ul>
@@ -927,7 +872,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-user" /> <span> Profile </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "profile" ? (
                     <ul>
@@ -971,7 +915,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-key" /> <span> Authentication </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "authentication" ? (
                     <ul>
@@ -1006,7 +949,7 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-exclamation-triangle" />{" "}
-                    <span> Error Pages </span> <span className="menu-arrow" />
+                    <span> Error Pages </span>
                   </a>
                   {isSideMenu == "error pages" ? (
                     <ul>
@@ -1032,7 +975,7 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-hand-o-up" />{" "}
-                    <span> Subscriptions </span> <span className="menu-arrow" />
+                    <span> Subscriptions </span>
                   </a>
                   {isSideMenu == "subscriptions" ? (
                     <ul>
@@ -1086,7 +1029,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-columns" /> <span> Pages </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "pages" ? (
                     <ul>
@@ -1167,7 +1109,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-object-group" /> <span> Forms </span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "forms" ? (
                     <ul>
@@ -1248,7 +1189,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-table" /> <span> Tables </span>{" "}
-                    <span className="menu-arrow" />
                   </Link>
                   {isSideMenu == "tables" ? (
                     <ul>
@@ -1304,7 +1244,6 @@ const Sidebar = (props) => {
                     }
                   >
                     <i className="la la-share-alt" /> <span>Multi Level</span>{" "}
-                    <span className="menu-arrow" />
                   </a>
                   {isSideMenu == "multi Level" ? (
                     <ul>
@@ -1319,7 +1258,7 @@ const Sidebar = (props) => {
                           }
                         >
                           {" "}
-                          <span>Level 1</span> <span className="menu-arrow" />
+                          <span>Level 1</span>
                         </a>
                         {level2Menu == "level 1" ? (
                           <ul>
@@ -1342,7 +1281,6 @@ const Sidebar = (props) => {
                               >
                                 {" "}
                                 <span> Level 2</span>{" "}
-                                <span className="menu-arrow" />
                               </a>
                               {level3Menu == "level 2" ? (
                                 <ul>
@@ -1393,35 +1331,17 @@ const Sidebar = (props) => {
                     toggleSidebar(isSideMenu == "dashboard" ? "" : "dashboard")
                   }
                 >
-                  <i className="la la-dashboard" /> <span> Dashboard</span>{" "}
-                  <span className="menu-arrow" />
+                  <i className="la la-dashboard" />{" "}
+                  <Link
+                    className={
+                      pathname.includes("main/dashboard") ? "active" : ""
+                    }
+                    to="/app/main/dashboard"
+                  >
+                    Admin Dashboard
+                  </Link>
                 </a>
-                {isSideMenu == "dashboard" ? (
-                  <ul>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("main/dashboard") ? "active" : ""
-                        }
-                        to="/app/main/dashboard"
-                      >
-                        Admin Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("main/employee-") ? "active" : ""
-                        }
-                        to="/app/main/employee-dashboard"
-                      >
-                        Config dashboard
-                      </Link>
-                    </li>
-                  </ul>
-                ) : (
-                  ""
-                )}
+                {isSideMenu == "dashboard" ? <ul></ul> : ""}
               </li>
 
               <li className="menu-title">
@@ -1436,23 +1356,16 @@ const Sidebar = (props) => {
                   }
                 >
                   <i className="la la-user" />{" "}
-                  <span className="noti-dot"> Config list</span>{" "}
-                  <span className="menu-arrow" />
+                  <li>
+                    <Link
+                      className={pathname.includes("config") ? "active" : ""}
+                      to="/app/employee/config"
+                    >
+                      Configs
+                    </Link>
+                  </li>
                 </a>
-                {isSideMenu == "employee" ? (
-                  <ul>
-                    <li>
-                      <Link
-                        className={pathname.includes("config") ? "active" : ""}
-                        to="/app/employee/config"
-                      >
-                        Configs
-                      </Link>
-                    </li>
-                  </ul>
-                ) : (
-                  ""
-                )}
+                {isSideMenu == "employee" ? <ul></ul> : ""}
               </li>
             </ul>
           </div>
@@ -2167,16 +2080,6 @@ const Sidebar = (props) => {
                         to="/app/main/dashboard"
                       >
                         Admin Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("main/employee-") ? "active" : ""
-                        }
-                        to="/app/main/employee-dashboard"
-                      >
-                        Config dashboard
                       </Link>
                     </li>
                   </ul>
@@ -3728,7 +3631,6 @@ const Sidebar = (props) => {
                             >
                               {" "}
                               <span> Level 2</span>{" "}
-                              <span className="menu-arrow" />
                             </a>
                             {level3Menu == "level 2" ? (
                               <ul>

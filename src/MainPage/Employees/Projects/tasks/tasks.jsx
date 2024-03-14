@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { DefaultEditor } from "react-simple-wysiwyg";
-import Offcanvas from "../../../../Entryfile/offcanvance";
 
 // import ReactSummernote from 'react-summernote';
 // import 'react-summernote/dist/react-summernote.css'; // import styles
@@ -1045,7 +1044,6 @@ const Tasks = () => {
         </div>
         {/* /Task Followers Modal */}
       </div>
-      <Offcanvas />
     </>
   );
 };

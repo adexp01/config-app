@@ -4,15 +4,26 @@ export const configsSlice = createSlice({
   name: "configs",
   initialState: [],
   reducers: {
-    addConfig: (state, action) => [...state, action.payload],
-    deleteConfig: (state, action) => [
-      ...state.filter((config) => config.id !== action.payload.id),
-    ],
+    addConfig: (state, action) => {
+      const result = [...state, action.payload];
+      localStorage.setItem("configs", JSON.stringify(result));
+      return result;
+    },
+    deleteConfig: (state, action) => {
+      const result = [
+        ...state.filter((config) => config.id !== action.payload.id),
+      ];
+      localStorage.setItem("configs", JSON.stringify(result));
+      return result;
+    },
     updateConfig: (state, action) => {
-      const index = state.findIndex(
-        (config) => config.id === action.payload.id
-      );
-      state[index] = action.payload;
+      const result = [
+        ...state.map((config) =>
+          config.id === action.payload.id ? action.payload : config
+        ),
+      ];
+      localStorage.setItem("configs", JSON.stringify(result));
+      return result;
     },
   },
 });

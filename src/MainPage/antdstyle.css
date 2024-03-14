@@ -198,10 +198,7 @@ td.ant-table-column-sort {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  overflow-y: scroll !important;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  height: 500px;
+
   padding: 10px 0px 10px 10px;
 }
 
@@ -224,10 +221,26 @@ td.ant-table-column-sort {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  height: fit-content;
+  border: 1px solid;
 }
 .merchant-wrapper {
   overflow-y: scroll !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
   height: 150px;
+}
+
+.create-config-wrapper {
+  overflow-y: scroll !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 500px;
+}
+[data-layout="vertical"] .sidebar > div > div {
+  overflow-y: hidden !important;
+}
+
+.custom-control-label {
+  padding-left: 10px;
 }

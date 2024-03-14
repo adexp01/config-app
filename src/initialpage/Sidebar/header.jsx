@@ -97,12 +97,7 @@ const Header = (props) => {
             <a href="" className="dropdown-item">
               <img src={lnEnglish} alt="" height={16} /> English
             </a>
-            <a href="" className="dropdown-item">
-              <img src={lnFrench} alt="" height={16} /> French
-            </a>
-            <a href="" className="dropdown-item">
-              <img src={lnSpanish} alt="" height={16} /> Spanish
-            </a>
+
             <a href="" className="dropdown-item">
               <img src={lnGerman} alt="" height={16} /> German
             </a>
@@ -123,12 +118,6 @@ const Header = (props) => {
             <span>{ProfileName ? ` ${ProfileName}` : "Admin"}</span>
           </a>
           <div className="dropdown-menu dropdown-menu-end">
-            <Link className="dropdown-item" to="/app/profile/employee-profile">
-              My Profile
-            </Link>
-            <Link className="dropdown-item" to="/settings/companysetting">
-              Settings
-            </Link>
             <Link className="dropdown-item" to="/login">
               Logout
             </Link>

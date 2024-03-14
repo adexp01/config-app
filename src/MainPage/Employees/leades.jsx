@@ -16,7 +16,6 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
-import Offcanvas from "../../Entryfile/offcanvance";
 
 const Leads = () => {
   const [data, setData] = useState([
@@ -250,7 +249,6 @@ const Leads = () => {
         </div>
         {/* /Page Content */}
       </div>
-      <Offcanvas />
     </>
   );
 };

@@ -12,7 +12,6 @@ import {
   Avatar_10,
   Avatar_16,
 } from "../../../Entryfile/imagepath";
-import Offcanvas from "../../../Entryfile/offcanvance";
 
 const EmployeeProfile = () => {
   const { loginvalue } = useSelector((state) => state.user);
@@ -106,7 +105,7 @@ const EmployeeProfile = () => {
                                 <a href="">
                                   {loginvalue?.email
                                     ? ` ${loginvalue?.email}`
-                                    : "admin@dreamguystech.com"}
+                                    : "admin@gmail.com"}
                                 </a>
                               </div>
                             </li>
@@ -2199,7 +2198,6 @@ const EmployeeProfile = () => {
         </div>
         {/* /Experience Modal */}
       </div>
-      <Offcanvas />
     </>
   );
 };

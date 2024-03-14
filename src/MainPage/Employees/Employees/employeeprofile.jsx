@@ -12,7 +12,6 @@ import {
   Avatar_10,
   Avatar_16,
 } from "../../../Entryfile/imagepath";
-import Offcanvas from "../../../Entryfile/offcanvance";
 
 const EmployeeProfile = ({ selectedRow }) => {
   const { loginvalue } = useSelector((state) => state.user);
@@ -32,13 +31,27 @@ const EmployeeProfile = ({ selectedRow }) => {
     <>
       <div className="page-wrapper">
         <Helmet>
-          <title>Employee Profile - HRMS admin Template</title>
           <meta name="description" content="Reactify Blank Page" />
         </Helmet>
         {/* Page Content */}
         <div className="content container-fluid">
           <div className="tab-content">
             {/* Profile Info Tab */}
+            {selectedRow && (
+              <div
+                style={{
+                  margin: "20px",
+                  backgroundColor: "#f0f0f0",
+                  padding: "20px",
+                  borderRadius: "10px",
+                }}
+              >
+                <h3>Selected Configuration</h3>
+                <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+                  {JSON.stringify(selectedRow, null, 2)}
+                </pre>
+              </div>
+            )}
             {selectedRow && (
               <div
                 id="emp_profile"
@@ -1125,7 +1138,6 @@ const EmployeeProfile = ({ selectedRow }) => {
         </div>
         {/* /Experience Modal */}
       </div>
-      <Offcanvas />
     </>
   );
 };

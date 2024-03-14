@@ -1,64 +1,68 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
-  Avatar_16, Avatar_02, Avatar_05, Avatar_09, Avatar_10, Avatar_11, Avatar_12, Avatar_13,
-  Avatar_01
-} from "../../../Entryfile/imagepath"
+  Avatar_16,
+  Avatar_02,
+  Avatar_05,
+  Avatar_09,
+  Avatar_10,
+  Avatar_11,
+  Avatar_12,
+  Avatar_13,
+  Avatar_01,
+} from "../../../Entryfile/imagepath";
 
 // import ReactSummernote from 'react-summernote';
 // import 'react-summernote/dist/react-summernote.css'; // import styles
 // import "../../../../node_modules/react-summernote/dist/react-summernote.css";
-import Editproject from "../../../_components/modelbox/Editproject"
-import "../../index.css"
-import { DefaultEditor } from 'react-simple-wysiwyg';
-import Offcanvas from '../../../Entryfile/offcanvance';
-
+import Editproject from "../../../_components/modelbox/Editproject";
+import "../../index.css";
+import { DefaultEditor } from "react-simple-wysiwyg";
 
 const ProjectList = () => {
-  const [html, setHtml] = React.useState('my <b>HTML</b>');
+  const [html, setHtml] = React.useState("my <b>HTML</b>");
   const [windowDimension, detectHW] = useState({
     winWidth: window.innerWidth,
     winHeight: window.innerHeight,
-  })
+  });
   const detectSize = () => {
     detectHW({
       winWidth: window.innerWidth,
       winHeight: window.innerHeight,
-
-    })
-  }
+    });
+  };
   useEffect(() => {
-    window.addEventListener("resize", detectSize)
+    window.addEventListener("resize", detectSize);
     return () => {
-      window.removeEventListener('resize', detectSize)
-    }
-  }, [windowDimension])
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [windowDimension]);
 
   function onChange(e) {
     setHtml(e.target.value);
   }
   useEffect(() => {
-    if ($('.select').length > 0) {
-      $('.select').select2({
+    if ($(".select").length > 0) {
+      $(".select").select2({
         minimumResultsForSearch: -1,
-        width: '100%'
+        width: "100%",
       });
     }
   });
   const onImageUpload = (fileList) => {
-
     const reader = new FileReader();
     reader.onloadend = () => {
       ReactSummernote.insertImage(reader.result);
-    }
+    };
     reader.readAsDataURL(fileList[0]);
-
-  }
+  };
   return (
     <>
-      <div className="page-wrapper" style={{ minHeight: windowDimension.winHeight }}>
+      <div
+        className="page-wrapper"
+        style={{ minHeight: windowDimension.winHeight }}
+      >
         <Helmet>
           <title>Projects - HRMS Admin Template</title>
           <meta name="description" content="Login page" />
@@ -71,15 +75,34 @@ const ProjectList = () => {
               <div className="col">
                 <h3 className="page-title">Projects</h3>
                 <ul className="breadcrumb">
-                  <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
+                  <li className="breadcrumb-item">
+                    <Link to="/app/main/dashboard">Dashboard</Link>
+                  </li>
                   <li className="breadcrumb-item active">Projects</li>
                 </ul>
               </div>
               <div className="col-auto float-end ms-auto">
-                <Link to="#" className="btn add-btn" data-bs-toggle="modal" data-bs-target="#create_project"><i className="fa fa-plus" /> Create Project</Link>
+                <Link
+                  to="#"
+                  className="btn add-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#create_project"
+                >
+                  <i className="fa fa-plus" /> Create Project
+                </Link>
                 <div className="view-icons">
-                  <Link to="/app/projects/project_dashboard" className="grid-view btn btn-link"><i className="fa fa-th" /></Link>
-                  <Link to="/app/projects/projects-list" className="list-view btn btn-link active"><i className="fa fa-bars" /></Link>
+                  <Link
+                    to="/app/projects/project_dashboard"
+                    className="grid-view btn btn-link"
+                  >
+                    <i className="fa fa-th" />
+                  </Link>
+                  <Link
+                    to="/app/projects/projects-list"
+                    className="list-view btn btn-link active"
+                  >
+                    <i className="fa fa-bars" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -112,7 +135,10 @@ const ProjectList = () => {
               </div>
             </div>
             <div className="col-sm-6 col-md-3">
-              <Link to="#" className="btn btn-success btn-block w-100"> Search </Link>
+              <Link to="#" className="btn btn-success btn-block w-100">
+                {" "}
+                Search{" "}
+              </Link>
             </div>
           </div>
           {/* /Search Filter */}
@@ -135,32 +161,71 @@ const ProjectList = () => {
                   <tbody>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Office Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Office Management
+                        </Link>
                       </td>
                       <td>PRO-0001</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members text-nowrap">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li className="dropdown avatar-dropdown">
-                            <Link to="#" className="all-users dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">+15</Link>
+                            <Link
+                              to="#"
+                              className="all-users dropdown-toggle"
+                              data-bs-toggle="dropdown"
+                              aria-expanded="false"
+                            >
+                              +15
+                            </Link>
                             <div className="dropdown-menu dropdown-menu-right">
                               <div className="avatar-group">
                                 <Link className="avatar avatar-xs" to="#">
@@ -194,15 +259,31 @@ const ProjectList = () => {
                               <div className="avatar-pagination">
                                 <ul className="pagination">
                                   <li className="page-item">
-                                    <Link className="page-link" to="#" aria-label="Previous">
+                                    <Link
+                                      className="page-link"
+                                      to="#"
+                                      aria-label="Previous"
+                                    >
                                       <span aria-hidden="true">«</span>
                                       <span className="sr-only">Previous</span>
                                     </Link>
                                   </li>
-                                  <li className="page-item"><Link className="page-link" to="#">1</Link></li>
-                                  <li className="page-item"><Link className="page-link" to="#">2</Link></li>
                                   <li className="page-item">
-                                    <Link className="page-link" to="#" aria-label="Next">
+                                    <Link className="page-link" to="#">
+                                      1
+                                    </Link>
+                                  </li>
+                                  <li className="page-item">
+                                    <Link className="page-link" to="#">
+                                      2
+                                    </Link>
+                                  </li>
+                                  <li className="page-item">
+                                    <Link
+                                      className="page-link"
+                                      to="#"
+                                      aria-label="Next"
+                                    >
                                       <span aria-hidden="true">»</span>
                                       <span className="sr-only">Next</span>
                                     </Link>
@@ -216,639 +297,1551 @@ const ProjectList = () => {
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Project Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Project Management
+                        </Link>
                       </td>
                       <td>PRO-0002</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-warning" /> Medium </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-warning" />{" "}
+                            Medium{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> Inactive </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            Inactive{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Video Calling App</Link>
+                        <Link to="/app/projects/projects-view">
+                          Video Calling App
+                        </Link>
                       </td>
                       <td>PRO-0003</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Low </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Low{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Hospital Administration</Link>
+                        <Link to="/app/projects/projects-view">
+                          Hospital Administration
+                        </Link>
                       </td>
                       <td>PRO-0004</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Office Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Office Management
+                        </Link>
                       </td>
                       <td>PRO-0005</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Project Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Project Management
+                        </Link>
                       </td>
                       <td>PRO-0006</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Video Calling App</Link>
+                        <Link to="/app/projects/projects-view">
+                          Video Calling App
+                        </Link>
                       </td>
                       <td>PRO-0007</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Hospital Administration</Link>
+                        <Link to="/app/projects/projects-view">
+                          Hospital Administration
+                        </Link>
                       </td>
                       <td>PRO-0008</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Office Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Office Management
+                        </Link>
                       </td>
                       <td>PRO-0009</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="#" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to="#"
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="#" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to="#"
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Project Management</Link>
+                        <Link to="/app/projects/projects-view">
+                          Project Management
+                        </Link>
                       </td>
                       <td>PRO-0010</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Link to="/app/projects/projects-view">Video Calling App</Link>
+                        <Link to="/app/projects/projects-view">
+                          Video Calling App
+                        </Link>
                       </td>
                       <td>PRO-0011</td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor"><img alt="" src={Avatar_16} /></Link>
+                            <Link
+                              to="#"
+                              data-bs-toggle="tooltip"
+                              title="Jeffery Lalor"
+                            >
+                              <img alt="" src={Avatar_16} />
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>
                         <ul className="team-members">
                           <li>
-                            <Link to="#" title="John Doe" data-bs-toggle="tooltip"><img alt="" src={Avatar_02} /></Link>
+                            <Link
+                              to="#"
+                              title="John Doe"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_02} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Richard Miles" data-bs-toggle="tooltip"><img alt="" src={Avatar_09} /></Link>
+                            <Link
+                              to="#"
+                              title="Richard Miles"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_09} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="John Smith" data-bs-toggle="tooltip"><img alt="" src={Avatar_10} /></Link>
+                            <Link
+                              to="#"
+                              title="John Smith"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_10} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" title="Mike Litorus" data-bs-toggle="tooltip"><img alt="" src={Avatar_05} /></Link>
+                            <Link
+                              to="#"
+                              title="Mike Litorus"
+                              data-bs-toggle="tooltip"
+                            >
+                              <img alt="" src={Avatar_05} />
+                            </Link>
                           </li>
                           <li>
-                            <Link to="#" className="all-users">+15</Link>
+                            <Link to="#" className="all-users">
+                              +15
+                            </Link>
                           </li>
                         </ul>
                       </td>
                       <td>17 Apr 2019 </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-danger" /> High </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-danger" />{" "}
+                            High{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> High</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-warning" /> Medium</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Low</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              High
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-warning" />{" "}
+                              Medium
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Low
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div className="dropdown action-label">
-                          <Link to="" className="btn btn-white btn-sm btn-rounded dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="fa fa-dot-circle-o text-success" /> Active </Link>
+                          <Link
+                            to=""
+                            className="btn btn-white btn-sm btn-rounded dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="fa fa-dot-circle-o text-success" />{" "}
+                            Active{" "}
+                          </Link>
                           <div className="dropdown-menu">
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-success" /> Active</Link>
-                            <Link className="dropdown-item" to="#"><i className="fa fa-dot-circle-o text-danger" /> Inactive</Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-success" />{" "}
+                              Active
+                            </Link>
+                            <Link className="dropdown-item" to="#">
+                              <i className="fa fa-dot-circle-o text-danger" />{" "}
+                              Inactive
+                            </Link>
                           </div>
                         </div>
                       </td>
                       <td className="text-end">
                         <div className="dropdown dropdown-action">
-                          <Link to="#" className="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i className="material-icons">more_vert</i></Link>
+                          <Link
+                            to="#"
+                            className="action-icon dropdown-toggle"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i className="material-icons">more_vert</i>
+                          </Link>
                           <div className="dropdown-menu dropdown-menu-right">
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#edit_project"><i className="fa fa-pencil m-r-5" /> Edit</Link>
-                            <Link className="dropdown-item" to="#" data-bs-toggle="modal" data-bs-target="#delete_project"><i className="fa fa-trash-o m-r-5" /> Delete</Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#edit_project"
+                            >
+                              <i className="fa fa-pencil m-r-5" /> Edit
+                            </Link>
+                            <Link
+                              className="dropdown-item"
+                              to="#"
+                              data-bs-toggle="modal"
+                              data-bs-target="#delete_project"
+                            >
+                              <i className="fa fa-trash-o m-r-5" /> Delete
+                            </Link>
                           </div>
                         </div>
                       </td>
@@ -861,12 +1854,24 @@ const ProjectList = () => {
         </div>
         {/* /Page Content */}
         {/* Create Project Modal */}
-        <div id="create_project" className="modal custom-modal fade" role="dialog">
-          <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div
+          id="create_project"
+          className="modal custom-modal fade"
+          role="dialog"
+        >
+          <div
+            className="modal-dialog modal-dialog-centered modal-lg"
+            role="document"
+          >
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Create Project</h5>
-                <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+                <button
+                  type="button"
+                  className="close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
@@ -894,7 +1899,10 @@ const ProjectList = () => {
                       <div className="form-group">
                         <label>Start Date</label>
                         <div>
-                          <input className="form-control datetimepicker" type="date" />
+                          <input
+                            className="form-control datetimepicker"
+                            type="date"
+                          />
                         </div>
                       </div>
                     </div>
@@ -902,7 +1910,10 @@ const ProjectList = () => {
                       <div className="form-group">
                         <label>End Date</label>
                         <div>
-                          <input className="form-control datetimepicker" type="date" />
+                          <input
+                            className="form-control datetimepicker"
+                            type="date"
+                          />
                         </div>
                       </div>
                     </div>
@@ -911,7 +1922,11 @@ const ProjectList = () => {
                     <div className="col-sm-3">
                       <div className="form-group">
                         <label>Rate</label>
-                        <input placeholder="$50" className="form-control" type="text" />
+                        <input
+                          placeholder="$50"
+                          className="form-control"
+                          type="text"
+                        />
                       </div>
                     </div>
                     <div className="col-sm-3">
@@ -945,7 +1960,12 @@ const ProjectList = () => {
                       <div className="form-group">
                         <label>Team Leader</label>
                         <div className="project-members">
-                          <Link to="#" data-bs-toggle="tooltip" title="Jeffery Lalor" className="avatar">
+                          <Link
+                            to="#"
+                            data-bs-toggle="tooltip"
+                            title="Jeffery Lalor"
+                            className="avatar"
+                          >
                             <img src={Avatar_16} alt="" />
                           </Link>
                         </div>
@@ -963,16 +1983,36 @@ const ProjectList = () => {
                       <div className="form-group">
                         <label>Team Members</label>
                         <div className="project-members">
-                          <Link to="#" data-bs-toggle="tooltip" title="John Doe" className="avatar">
+                          <Link
+                            to="#"
+                            data-bs-toggle="tooltip"
+                            title="John Doe"
+                            className="avatar"
+                          >
                             <img src={Avatar_16} alt="" />
                           </Link>
-                          <Link to="#" data-bs-toggle="tooltip" title="Richard Miles" className="avatar">
+                          <Link
+                            to="#"
+                            data-bs-toggle="tooltip"
+                            title="Richard Miles"
+                            className="avatar"
+                          >
                             <img src={Avatar_09} alt="" />
                           </Link>
-                          <Link to="#" data-bs-toggle="tooltip" title="John Smith" className="avatar">
+                          <Link
+                            to="#"
+                            data-bs-toggle="tooltip"
+                            title="John Smith"
+                            className="avatar"
+                          >
                             <img src={Avatar_10} alt="" />
                           </Link>
-                          <Link to="#" data-bs-toggle="tooltip" title="Mike Litorus" className="avatar">
+                          <Link
+                            to="#"
+                            data-bs-toggle="tooltip"
+                            title="Mike Litorus"
+                            className="avatar"
+                          >
                             <img src={Avatar_05} alt="" />
                           </Link>
                           <span className="all-team">+2</span>
@@ -1009,7 +2049,9 @@ const ProjectList = () => {
                     <input className="form-control" type="file" />
                   </div>
                   <div className="submit-section">
-                    <button className="btn btn-primary submit-btn">Submit</button>
+                    <button className="btn btn-primary submit-btn">
+                      Submit
+                    </button>
                   </div>
                 </form>
               </div>
@@ -1018,10 +2060,14 @@ const ProjectList = () => {
         </div>
         {/* /Create Project Modal */}
         {/* Edit Project Modal */}
-        < Editproject />
+        <Editproject />
         {/* /Edit Project Modal */}
         {/* Delete Project Modal */}
-        <div className="modal custom-modal fade" id="delete_project" role="dialog">
+        <div
+          className="modal custom-modal fade"
+          id="delete_project"
+          role="dialog"
+        >
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-body">
@@ -1032,10 +2078,18 @@ const ProjectList = () => {
                 <div className="modal-btn delete-action">
                   <div className="row">
                     <div className="col-6">
-                      <Link to="" className="btn btn-primary continue-btn">Delete</Link>
+                      <Link to="" className="btn btn-primary continue-btn">
+                        Delete
+                      </Link>
                     </div>
                     <div className="col-6">
-                      <Link to="" data-bs-dismiss="modal" className="btn btn-primary cancel-btn">Cancel</Link>
+                      <Link
+                        to=""
+                        data-bs-dismiss="modal"
+                        className="btn btn-primary cancel-btn"
+                      >
+                        Cancel
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -1045,9 +2099,8 @@ const ProjectList = () => {
         </div>
         {/* /Delete Project Modal */}
       </div>
-      <Offcanvas />
     </>
   );
-}
+};
 
 export default ProjectList;

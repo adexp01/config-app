@@ -1,27 +1,26 @@
 /**
  * Form Elemets
  */
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from 'react-router-dom';
-import Offcanvas from '../../../../Entryfile/offcanvance';
+import { Link } from "react-router-dom";
 
 const HorizontalForm = () => {
-  useEffect( ()=>{
-    if($('.select').length > 0) {
-      $('.select').select2({
+  useEffect(() => {
+    if ($(".select").length > 0) {
+      $(".select").select2({
         minimumResultsForSearch: -1,
-        width: '100%'
+        width: "100%",
       });
     }
-  });  
-		return (
-      <>
+  });
+  return (
+    <>
       <div className="page-wrapper">
-			<Helmet>
-				  <title>Horizontal Form - HRMS Admin Template</title>
-				  <meta name="description" content="Login page"/>					
-			</Helmet>
+        <Helmet>
+          <title>Horizontal Form - HRMS Admin Template</title>
+          <meta name="description" content="Login page" />
+        </Helmet>
         <div className="content container-fluid">
           {/* Page Header */}
           <div className="page-header">
@@ -29,7 +28,9 @@ const HorizontalForm = () => {
               <div className="col">
                 <h3 className="page-title">Horizontal Form</h3>
                 <ul className="breadcrumb">
-                  <li className="breadcrumb-item"><Link to="/app/main/dashboard">Dashboard</Link></li>
+                  <li className="breadcrumb-item">
+                    <Link to="/app/main/dashboard">Dashboard</Link>
+                  </li>
                   <li className="breadcrumb-item active">Horizontal Form</li>
                 </ul>
               </div>
@@ -45,43 +46,57 @@ const HorizontalForm = () => {
                 <div className="card-body">
                   <form action="#">
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">First Name</label>
+                      <label className="col-lg-3 col-form-label">
+                        First Name
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Last Name</label>
+                      <label className="col-lg-3 col-form-label">
+                        Last Name
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Email Address</label>
+                      <label className="col-lg-3 col-form-label">
+                        Email Address
+                      </label>
                       <div className="col-lg-9">
                         <input type="email" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Username</label>
+                      <label className="col-lg-3 col-form-label">
+                        Username
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Password</label>
+                      <label className="col-lg-3 col-form-label">
+                        Password
+                      </label>
                       <div className="col-lg-9">
                         <input type="password" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Repeat Password</label>
+                      <label className="col-lg-3 col-form-label">
+                        Repeat Password
+                      </label>
                       <div className="col-lg-9">
                         <input type="password" className="form-control" />
                       </div>
                     </div>
                     <div className="text-end">
-                      <button type="submit" className="btn btn-primary">Submit</button>
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -95,13 +110,17 @@ const HorizontalForm = () => {
                 <div className="card-body">
                   <form action="#">
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Address 1</label>
+                      <label className="col-lg-3 col-form-label">
+                        Address 1
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Address 2</label>
+                      <label className="col-lg-3 col-form-label">
+                        Address 2
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
@@ -125,13 +144,17 @@ const HorizontalForm = () => {
                       </div>
                     </div>
                     <div className="form-group row">
-                      <label className="col-lg-3 col-form-label">Postal Code</label>
+                      <label className="col-lg-3 col-form-label">
+                        Postal Code
+                      </label>
                       <div className="col-lg-9">
                         <input type="text" className="form-control" />
                       </div>
                     </div>
                     <div className="text-end">
-                      <button type="submit" className="btn btn-primary">Submit</button>
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -142,7 +165,9 @@ const HorizontalForm = () => {
             <div className="col-md-12">
               <div className="card">
                 <div className="card-header">
-                  <h4 className="card-title mb-0">Two Column Horizontal Form</h4>
+                  <h4 className="card-title mb-0">
+                    Two Column Horizontal Form
+                  </h4>
                 </div>
                 <div className="card-body">
                   <h4 className="card-title">Personal Information</h4>
@@ -150,36 +175,63 @@ const HorizontalForm = () => {
                     <div className="row">
                       <div className="col-xl-6">
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">First Name</label>
+                          <label className="col-lg-3 col-form-label">
+                            First Name
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Last Name</label>
+                          <label className="col-lg-3 col-form-label">
+                            Last Name
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Gender</label>
+                          <label className="col-lg-3 col-form-label">
+                            Gender
+                          </label>
                           <div className="col-lg-9">
                             <div className="form-check form-check-inline">
-                              <input className="form-check-input" type="radio" name="gender" id="gender_male" defaultValue="option1" defaultChecked />
-                              <label className="form-check-label" htmlFor="gender_male">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="gender_male"
+                                defaultValue="option1"
+                                defaultChecked
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="gender_male"
+                              >
                                 Male
                               </label>
                             </div>
                             <div className="form-check form-check-inline">
-                              <input className="form-check-input" type="radio" name="gender" id="gender_female" defaultValue="option2" />
-                              <label className="form-check-label" htmlFor="gender_female">
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="gender_female"
+                                defaultValue="option2"
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor="gender_female"
+                              >
                                 Female
                               </label>
                             </div>
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Blood Group</label>
+                          <label className="col-lg-3 col-form-label">
+                            Blood Group
+                          </label>
                           <div className="col-lg-9">
                             <select className="select">
                               <option>Select</option>
@@ -193,25 +245,33 @@ const HorizontalForm = () => {
                       </div>
                       <div className="col-xl-6">
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Username</label>
+                          <label className="col-lg-3 col-form-label">
+                            Username
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Email</label>
+                          <label className="col-lg-3 col-form-label">
+                            Email
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Password</label>
+                          <label className="col-lg-3 col-form-label">
+                            Password
+                          </label>
                           <div className="col-lg-9">
                             <input type="password" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Repeat Password</label>
+                          <label className="col-lg-3 col-form-label">
+                            Repeat Password
+                          </label>
                           <div className="col-lg-9">
                             <input type="password" className="form-control" />
                           </div>
@@ -222,19 +282,25 @@ const HorizontalForm = () => {
                     <div className="row">
                       <div className="col-xl-6">
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Address Line 1</label>
+                          <label className="col-lg-3 col-form-label">
+                            Address Line 1
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Address Line 2</label>
+                          <label className="col-lg-3 col-form-label">
+                            Address Line 2
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">State</label>
+                          <label className="col-lg-3 col-form-label">
+                            State
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
@@ -242,19 +308,25 @@ const HorizontalForm = () => {
                       </div>
                       <div className="col-xl-6">
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">City</label>
+                          <label className="col-lg-3 col-form-label">
+                            City
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Country</label>
+                          <label className="col-lg-3 col-form-label">
+                            Country
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Postal Code</label>
+                          <label className="col-lg-3 col-form-label">
+                            Postal Code
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
@@ -262,7 +334,9 @@ const HorizontalForm = () => {
                       </div>
                     </div>
                     <div className="text-end">
-                      <button type="submit" className="btn btn-primary">Submit</button>
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -273,7 +347,9 @@ const HorizontalForm = () => {
             <div className="col-md-12">
               <div className="card mb-0">
                 <div className="card-header">
-                  <h4 className="card-title mb-0">Two Column Horizontal Form</h4>
+                  <h4 className="card-title mb-0">
+                    Two Column Horizontal Form
+                  </h4>
                 </div>
                 <div className="card-body">
                   <form action="#">
@@ -281,25 +357,33 @@ const HorizontalForm = () => {
                       <div className="col-xl-6">
                         <h4 className="card-title">Personal Details</h4>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">First Name</label>
+                          <label className="col-lg-3 col-form-label">
+                            First Name
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Last Name</label>
+                          <label className="col-lg-3 col-form-label">
+                            Last Name
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Password</label>
+                          <label className="col-lg-3 col-form-label">
+                            Password
+                          </label>
                           <div className="col-lg-9">
                             <input type="password" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">State</label>
+                          <label className="col-lg-3 col-form-label">
+                            State
+                          </label>
                           <div className="col-lg-9">
                             <select className="select">
                               <option>Select State</option>
@@ -310,47 +394,74 @@ const HorizontalForm = () => {
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">About</label>
+                          <label className="col-lg-3 col-form-label">
+                            About
+                          </label>
                           <div className="col-lg-9">
-                            <textarea rows={4} cols={5} className="form-control" placeholder="Enter message" defaultValue={""} />
+                            <textarea
+                              rows={4}
+                              cols={5}
+                              className="form-control"
+                              placeholder="Enter message"
+                              defaultValue={""}
+                            />
                           </div>
                         </div>
                       </div>
                       <div className="col-xl-6">
                         <h4 className="card-title">Personal details</h4>
                         <div className="row">
-                          <label className="col-lg-3 col-form-label">Name</label>
+                          <label className="col-lg-3 col-form-label">
+                            Name
+                          </label>
                           <div className="col-lg-9">
                             <div className="row">
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="text" placeholder="First Name" className="form-control" />
+                                  <input
+                                    type="text"
+                                    placeholder="First Name"
+                                    className="form-control"
+                                  />
                                 </div>
                               </div>
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="text" placeholder="Last Name" className="form-control" />
+                                  <input
+                                    type="text"
+                                    placeholder="Last Name"
+                                    className="form-control"
+                                  />
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Email</label>
+                          <label className="col-lg-3 col-form-label">
+                            Email
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Phone</label>
+                          <label className="col-lg-3 col-form-label">
+                            Phone
+                          </label>
                           <div className="col-lg-9">
                             <input type="text" className="form-control" />
                           </div>
                         </div>
                         <div className="form-group row">
-                          <label className="col-lg-3 col-form-label">Address</label>
+                          <label className="col-lg-3 col-form-label">
+                            Address
+                          </label>
                           <div className="col-lg-9">
-                            <input type="text" className="form-control m-b-20" />
+                            <input
+                              type="text"
+                              className="form-control m-b-20"
+                            />
                             <div className="row">
                               <div className="col-md-6">
                                 <div className="form-group">
@@ -363,15 +474,27 @@ const HorizontalForm = () => {
                                   </select>
                                 </div>
                                 <div className="form-group">
-                                  <input type="text" placeholder="ZIP code" className="form-control" />
+                                  <input
+                                    type="text"
+                                    placeholder="ZIP code"
+                                    className="form-control"
+                                  />
                                 </div>
                               </div>
                               <div className="col-md-6">
                                 <div className="form-group">
-                                  <input type="text" placeholder="State/Province" className="form-control" />
+                                  <input
+                                    type="text"
+                                    placeholder="State/Province"
+                                    className="form-control"
+                                  />
                                 </div>
                                 <div className="form-group">
-                                  <input type="text" placeholder="City" className="form-control" />
+                                  <input
+                                    type="text"
+                                    placeholder="City"
+                                    className="form-control"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -380,18 +503,18 @@ const HorizontalForm = () => {
                       </div>
                     </div>
                     <div className="text-end">
-                      <button type="submit" className="btn btn-primary">Submit</button>
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>			
+        </div>
       </div>
-      <Offcanvas/>
-      </>
-            
-		);
-	}
-  export default HorizontalForm;
+    </>
+  );
+};
+export default HorizontalForm;

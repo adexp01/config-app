@@ -3,7 +3,6 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { Avatar_16, Avatar_02, Avatar_05, Avatar_09, Avatar_10, Avatar_11, Avatar_12, Avatar_01 } from "../../../Entryfile/imagepath"
-import Offcanvas from '../../../Entryfile/offcanvance';
 
 const TaskBoard = () => {
 
@@ -844,7 +843,6 @@ const TaskBoard = () => {
         </div>
         {/* /Edit Task Modal */}
       </div>
-      <Offcanvas />
     </>
 
   );

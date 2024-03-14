@@ -14,7 +14,6 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../paginationfunction";
 import "../antdstyle.css";
-import Offcanvas from "../../Entryfile/offcanvance";
 
 const Tickets = () => {
   const [data, setData] = useState([
@@ -603,7 +602,6 @@ const Tickets = () => {
         </div>
         {/* /Delete Ticket Modal */}
       </div>
-      <Offcanvas />
     </>
   );
 };

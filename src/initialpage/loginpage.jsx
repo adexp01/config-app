@@ -66,7 +66,6 @@ const Loginpage = (props) => {
         <meta name="description" content="Login page" />
       </Helmet>
       <div className="account-content">
-        {/* <Link to="/applyjob/joblist" className="btn btn-primary apply-btn">Apply Job</Link> */}
         <div className="container">
           {/* Account Logo */}
           <div className="account-logo">
@@ -99,7 +98,7 @@ const Loginpage = (props) => {
                       // className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                       className="form-control"
                       placeholder="Enter your email address"
-                      defaultValue="admin@dreamguystech.com"
+                      defaultValue="admin@gmail.com"
                     />
                     {/* <input name="email" className={`form-control  ${errors?.email ? "error-input" : ""}`} type="email" value={email} onChange={e => SetEmail(e.target.value)} autoComplete="false" /> */}
                     <small>{errors.email?.message}</small>
@@ -152,12 +151,6 @@ const Loginpage = (props) => {
                     </button>
                   </div>
                 </form>
-                <div className="account-footer">
-                  <p>
-                    Don't have an account yet?{" "}
-                    <Link to="/register">Register</Link>
-                  </p>
-                </div>
               </div>
               {/* /Account Form */}
             </div>
