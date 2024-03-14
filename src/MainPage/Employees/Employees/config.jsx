@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Header from "../../../initialpage/Sidebar/header";
 import Sidebar from "../../../initialpage/Sidebar/sidebar";
-import { Table } from "antd";
+import { Table, Checkbox, Select } from "antd";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
@@ -12,6 +12,7 @@ import { emptyConfig } from "../../../Entryfile/features/static/emptyConfig";
 import Radio from "../../../_components/radio/radio";
 import InputField from "../../../_components/inputField/inputField";
 import CheckboxGroup from "../../../_components/checkbox/checkbox";
+
 import {
   addConfig,
   deleteConfig,
@@ -84,6 +85,129 @@ const Config = () => {
       };
     }
   };
+
+  const selectMerchantEdit = (id) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      merchants: prev.merchants.includes(id)
+        ? prev.merchants.filter((merchantId) => merchantId !== id)
+        : [...prev.merchants, id],
+    }));
+  };
+
+  const highlightMerchantEdit = (id) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      merchantsSponsored: prev.merchantsSponsored.includes(id)
+        ? prev.merchantsSponsored.filter((merchantId) => merchantId !== id)
+        : [...prev.merchantsSponsored, id],
+    }));
+  };
+
+  const preferedMerchantEdit = (id) => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      merchantsPrefered: prev.merchantsPrefered.includes(id)
+        ? prev.merchantsPrefered.filter((merchantId) => merchantId !== id)
+        : [...prev.merchantsPrefered, id],
+    }));
+  };
+
+  const merchantColumns = [
+    {
+      title: "Apotheke",
+      dataIndex: "apotheke",
+      key: "apotheke",
+    },
+    {
+      title: "Include",
+      key: "include",
+      render: (_, record) => (
+        <Checkbox
+          checked={configState.merchants.includes(record.id)}
+          onChange={() => selectMerchant(record.id)}
+        />
+      ),
+    },
+    {
+      title: "Exclude",
+      key: "exclude",
+      render: (_, record) => (
+        <Checkbox
+          checked={configState.merchants.includes(-record.id)}
+          onChange={() => selectMerchant(-record.id)}
+        />
+      ),
+    },
+    {
+      title: "Highlight",
+      key: "highlight",
+      render: (_, record) => (
+        <Checkbox
+          checked={configState.merchantsSponsored.includes(record.id)}
+          onChange={() => highlightMerchant(record.id)}
+        />
+      ),
+    },
+    {
+      title: "Prefer",
+      key: "prefer",
+      render: (_, record) => (
+        <Checkbox
+          checked={configState.merchantsPrefered.includes(record.id)}
+          onChange={() => preferedMerchant(record.id)}
+        />
+      ),
+    },
+  ];
+
+  const merchantColumnsEdit = [
+    {
+      title: "Apotheke",
+      dataIndex: "apotheke",
+      key: "apotheke",
+    },
+    {
+      title: "Include",
+      key: "include",
+      render: (_, record) => (
+        <Checkbox
+          checked={selectedRow.merchants.includes(record.id)}
+          onChange={() => selectMerchantEdit(record.id)}
+        />
+      ),
+    },
+    {
+      title: "Exclude",
+      key: "exclude",
+      render: (_, record) => (
+        <Checkbox
+          checked={selectedRow.merchants.includes(-record.id)}
+          onChange={() => selectMerchantEdit(-record.id)}
+        />
+      ),
+    },
+    {
+      title: "Highlight",
+      key: "highlight",
+      render: (_, record) => (
+        <Checkbox
+          checked={selectedRow.merchantsSponsored.includes(record.id)}
+          onChange={() => highlightMerchantEdit(record.id)}
+        />
+      ),
+    },
+    {
+      title: "Prefer",
+      key: "prefer",
+      render: (_, record) => (
+        <Checkbox
+          checked={selectedRow.merchantsPrefered.includes(record.id)}
+          onChange={() => preferedMerchantEdit(record.id)}
+        />
+      ),
+    },
+  ];
 
   const handleChange = (e, edit = false) => {
     const { name, value } = e.target;
@@ -617,118 +741,14 @@ const Config = () => {
                         />
                       </div>
                     </div>
-                    <div
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
-                        gap: "20px",
-                      }}
-                    >
-                      <div className="merchant-wrapper">
-                        Limit to specific merchants
-                        <div className="merchant-container">
-                          <div>Apotheke</div>
-                          <div>CT</div>
-                          <div>BT</div>
-                          <div>ID</div>
-                        </div>
-                        {merchantsList.map((merchant) => (
-                          <div
-                            className={`merchant-container ${
-                              configState.merchants.includes(merchant.id)
-                                ? "active-merchant"
-                                : ""
-                            }`}
-                            key={merchant.id}
-                            onClick={() => selectMerchant(merchant.id)}
-                          >
-                            <div>{merchant.apotheke}</div>
-                            <div>{merchant.ct ? "yes" : "-"}</div>
-                            <div>{merchant.bt ? "yes" : "-"}</div>
-                            <div>{merchant.id}</div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="merchant-wrapper">
-                        Exclude merchants
-                        <div className="merchant-container">
-                          <div>Apotheke</div>
-                          <div>CT</div>
-                          <div>BT</div>
-                          <div>ID</div>
-                        </div>
-                        {merchantsList.map((merchant) => (
-                          <div
-                            className={`merchant-container ${
-                              configState.merchants.includes(merchant.id)
-                                ? "active-merchant"
-                                : ""
-                            }`}
-                            key={merchant.id}
-                            onClick={() => selectMerchant(-merchant.id)}
-                          >
-                            <div>{merchant.apotheke}</div>
-                            <div>{merchant.ct ? "yes" : "-"}</div>
-                            <div>{merchant.bt ? "yes" : "-"}</div>
-                            <div>{merchant.id}</div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="merchant-wrapper">
-                        Highlight merchants
-                        <div className="merchant-container">
-                          <div>Apotheke</div>
-                          <div>CT</div>
-                          <div>BT</div>
-                          <div>ID</div>
-                        </div>
-                        {merchantsList.map((merchant) => (
-                          <div
-                            className={`merchant-container ${
-                              configState.merchantsSponsored.includes(
-                                merchant.id
-                              )
-                                ? "active-merchant"
-                                : ""
-                            }`}
-                            key={merchant.id}
-                            onClick={() => highlightMerchant(merchant.id)}
-                          >
-                            <div>{merchant.apotheke}</div>
-                            <div>{merchant.ct ? "yes" : "-"}</div>
-                            <div>{merchant.bt ? "yes" : "-"}</div>
-                            <div>{merchant.id}</div>
-                          </div>
-                        ))}
-                      </div>
 
-                      <div className="merchant-wrapper">
-                        Pefered merchants
-                        <div className="merchant-container">
-                          <div>Apotheke</div>
-                          <div>CT</div>
-                          <div>BT</div>
-                          <div>ID</div>
-                        </div>
-                        {merchantsList.map((merchant) => (
-                          <div
-                            className={`merchant-container ${
-                              configState.merchantsPrefered.includes(
-                                merchant.id
-                              )
-                                ? "active-merchant"
-                                : ""
-                            }`}
-                            key={merchant.id}
-                            onClick={() => preferedMerchant(merchant.id)}
-                          >
-                            <div>{merchant.apotheke}</div>
-                            <div>{merchant.ct ? "yes" : "-"}</div>
-                            <div>{merchant.bt ? "yes" : "-"}</div>
-                            <div>{merchant.id}</div>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="merchant-wrapper">
+                      <Table
+                        dataSource={merchantsList}
+                        columns={merchantColumns}
+                        rowKey="id"
+                        pagination={false}
+                      />
                     </div>
                     <div className="submit-section">
                       <button
@@ -1057,119 +1077,13 @@ const Config = () => {
                             />
                           </div>
                         </div>
-                        <div
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2, 1fr)",
-                            gap: "20px",
-                          }}
-                        >
-                          <div className="merchant-wrapper">
-                            Limit to specific merchants
-                            <div className="merchant-container">
-                              <div>Apotheke</div>
-                              <div>CT</div>
-                              <div>BT</div>
-                              <div>ID</div>
-                            </div>
-                            {merchantsList.map((merchant) => (
-                              <div
-                                className={`merchant-container ${
-                                  selectedRow.merchants.includes(merchant.id)
-                                    ? "active-merchant"
-                                    : ""
-                                }`}
-                                key={merchant.id}
-                                onClick={() => selectMerchant(merchant.id)}
-                              >
-                                <div>{merchant.apotheke}</div>
-                                <div>{merchant.ct ? "yes" : "-"}</div>
-                                <div>{merchant.bt ? "yes" : "-"}</div>
-                                <div>{merchant.id}</div>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="merchant-wrapper">
-                            Exclude merchants
-                            <div className="merchant-container">
-                              <div>Apotheke</div>
-                              <div>CT</div>
-                              <div>BT</div>
-                              <div>ID</div>
-                            </div>
-                            {merchantsList.map((merchant) => (
-                              <div
-                                className={`merchant-container ${
-                                  selectedRow.merchants.includes(merchant.id)
-                                    ? "active-merchant"
-                                    : ""
-                                }`}
-                                key={merchant.id}
-                                onClick={() => selectMerchant(-merchant.id)}
-                              >
-                                <div>{merchant.apotheke}</div>
-                                <div>{merchant.ct ? "yes" : "-"}</div>
-                                <div>{merchant.bt ? "yes" : "-"}</div>
-                                <div>{merchant.id}</div>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="merchant-wrapper">
-                            Highlight merchants
-                            <div className="merchant-container">
-                              <div>Apotheke</div>
-                              <div>CT</div>
-                              <div>BT</div>
-                              <div>ID</div>
-                            </div>
-                            {merchantsList.map((merchant) => (
-                              <div
-                                className={`merchant-container ${
-                                  selectedRow.merchantsSponsored.includes(
-                                    merchant.id
-                                  )
-                                    ? "active-merchant"
-                                    : ""
-                                }`}
-                                key={merchant.id}
-                                onClick={() => highlightMerchant(merchant.id)}
-                              >
-                                <div>{merchant.apotheke}</div>
-                                <div>{merchant.ct ? "yes" : "-"}</div>
-                                <div>{merchant.bt ? "yes" : "-"}</div>
-                                <div>{merchant.id}</div>
-                              </div>
-                            ))}
-                          </div>
 
-                          <div className="merchant-wrapper">
-                            Pefered merchants
-                            <div className="merchant-container">
-                              <div>Apotheke</div>
-                              <div>CT</div>
-                              <div>BT</div>
-                              <div>ID</div>
-                            </div>
-                            {merchantsList.map((merchant) => (
-                              <div
-                                className={`merchant-container ${
-                                  selectedRow.merchantsPrefered.includes(
-                                    merchant.id
-                                  )
-                                    ? "active-merchant"
-                                    : ""
-                                }`}
-                                key={merchant.id}
-                                onClick={() => preferedMerchant(merchant.id)}
-                              >
-                                <div>{merchant.apotheke}</div>
-                                <div>{merchant.ct ? "yes" : "-"}</div>
-                                <div>{merchant.bt ? "yes" : "-"}</div>
-                                <div>{merchant.id}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
+                        <Table
+                          dataSource={merchantsList}
+                          columns={merchantColumnsEdit}
+                          rowKey="id"
+                          pagination={false}
+                        />
                       </>
                     )}
                     <div className="submit-section">
