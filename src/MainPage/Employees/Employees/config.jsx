@@ -744,6 +744,16 @@ const Config = () => {
                           selectedOption={configState.label.headerIcon}
                           onChange={handleChange}
                         />
+                        <button
+                          className="btn btn-primary submit-btn"
+                          onClick={(e) => {
+                            e.preventDefault();
+
+                            toggleMerchants();
+                          }}
+                        >
+                          Manage merchants
+                        </button>
                       </div>
                     </div>
 
@@ -770,16 +780,6 @@ const Config = () => {
                         }}
                       >
                         Submit
-                      </button>
-                      <button
-                        className="btn btn-primary submit-btn"
-                        onClick={(e) => {
-                          e.preventDefault();
-
-                          toggleMerchants();
-                        }}
-                      >
-                        Manage merchants
                       </button>
                     </div>
                   </form>
@@ -1096,7 +1096,16 @@ const Config = () => {
                             />
                           </div>
                         </div>
+                        <button
+                          className="btn btn-primary submit-btn"
+                          onClick={(e) => {
+                            e.preventDefault();
 
+                            toggleMerchants();
+                          }}
+                        >
+                          Manage merchants
+                        </button>
                         {showMerchants && (
                           <div className="merchant-wrapper">
                             <Table
@@ -1121,16 +1130,6 @@ const Config = () => {
                         }}
                       >
                         Save
-                      </button>
-                      <button
-                        className="btn btn-primary submit-btn"
-                        onClick={(e) => {
-                          e.preventDefault();
-
-                          toggleMerchants();
-                        }}
-                      >
-                        Manage merchants
                       </button>
                     </div>
                   </form>

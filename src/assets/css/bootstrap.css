@@ -5818,7 +5818,7 @@ fieldset:disabled .btn {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;

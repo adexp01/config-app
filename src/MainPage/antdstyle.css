@@ -248,3 +248,7 @@ td.ant-table-column-sort {
   overflow-y: scroll !important;
   height: 85vh;
 }
+
+.modal-content {
+  width: 100vw !important;
+}
