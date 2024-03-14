@@ -388,7 +388,7 @@ const Config = () => {
             <title>Config - HRMS Admin Template</title>
             <meta name="description" content="Login page" />
           </Helmet>
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <input
               type="text"
               className="form-control"
@@ -396,7 +396,7 @@ const Config = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-          </div>
+          </div> */}
           {/* Page Content */}
           <div className="content container-fluid">
             {/* Page Header */}
