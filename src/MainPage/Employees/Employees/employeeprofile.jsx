@@ -1191,7 +1191,7 @@ const EmployeeProfile = ({ selectedRow }) => {
               borderRadius: "10px",
             }}
           >
-            <h3>Selected Configuration</h3>
+            <h3>Selected Configuration JSON</h3>
             <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
               {JSON.stringify(selectedRow, null, 2)}
             </pre>
