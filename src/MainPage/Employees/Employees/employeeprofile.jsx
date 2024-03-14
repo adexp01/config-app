@@ -261,13 +261,6 @@ const EmployeeProfile = ({ selectedRow }) => {
                         <h3 className="card-title">Merchant Preferences</h3>
 
                         <div className="text">
-                          <img src={selectedRow.image} width={80} height={80} />
-                          <span style={{ paddingLeft: "10px" }}>
-                            {" "}
-                            Packshot of the product
-                          </span>
-                        </div>
-                        <div className="text">
                           Pefered merchants:{" "}
                           {selectedRow.merchantsPrefered.join(", ")}
                         </div>
@@ -330,6 +323,13 @@ const EmployeeProfile = ({ selectedRow }) => {
                             </li>
                           ))}
                         </ul>
+                        <div className="text">
+                          <img src={selectedRow.image} width={80} height={80} />
+                          <span style={{ paddingLeft: "10px" }}>
+                            {" "}
+                            Packshot of the product
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>

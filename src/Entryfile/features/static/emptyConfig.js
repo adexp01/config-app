@@ -10,15 +10,15 @@ export const emptyConfig = {
   posBranding: 2,
   image: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
   images: [
-    {
-      sku: "88888888",
-      image: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
-      imageFormat: { width: 75, height: 75 },
-    },
-    {
-      sku: "88888888",
-      image: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
-    },
+    // {
+    //   sku: "88888888",
+    //   image: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
+    //   imageFormat: { width: 75, height: 75 },
+    // },
+    // {
+    //   sku: "88888888",
+    //   image: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
+    // },
   ],
   style: {
     btnColor: "red",

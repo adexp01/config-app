@@ -708,14 +708,14 @@ const Config = () => {
                             <InputField
                               type={"text"}
                               name={"image"}
-                              label={"Image URL"}
+                              label={"Packshots per SKU image URL"}
                               onChange={handleSkuChange}
                               value={skuData.image}
                             />
                             <InputField
                               type={"text"}
                               name={"sku"}
-                              label={"SKU data"}
+                              label={"Packshots per SKU data"}
                               onChange={handleSkuChange}
                               value={skuData.sku}
                             />
@@ -1083,14 +1083,14 @@ const Config = () => {
                               <InputField
                                 type={"text"}
                                 name={"image"}
-                                label={"Image URL"}
+                                label={"Packshots per SKU Image URL"}
                                 onChange={handleSkuChange}
                                 value={skuData.image}
                               />
                               <InputField
                                 type={"text"}
                                 name={"sku"}
-                                label={"SKU data"}
+                                label={"Packshots per SKU data "}
                                 onChange={handleSkuChange}
                                 value={skuData.sku}
                               />
