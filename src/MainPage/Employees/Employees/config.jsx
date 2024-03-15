@@ -306,6 +306,18 @@ const Config = () => {
     }
   };
 
+  const removePackshot = (indexToRemove, edit = false) => {
+    const cb = (prev) => ({
+      ...prev,
+      images: prev.images.filter((_, index) => index !== indexToRemove),
+    });
+    if (edit) {
+      setSelectedRow(cb);
+    } else {
+      setConfigState(cb);
+    }
+  };
+
   const save = () => {
     dispatch(addConfig({ ...configState, id: faker.random.uuid() }));
     setConfigState(emptyConfig);
@@ -714,6 +726,7 @@ const Config = () => {
                             onChange={handleChange}
                             value={configState.image}
                           />
+
                           <div>
                             <InputField
                               type={"text"}
@@ -742,6 +755,39 @@ const Config = () => {
                             >
                               <i className="fa fa-plus" /> ADD packshot
                             </button>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
+                              {configState.images.map((image, index) => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "12px",
+                                  }}
+                                >
+                                  <div>
+                                    <div style={{ color: "black" }} key={image}>
+                                      Packshot sku: {image.sku}
+                                    </div>
+                                    <div style={{ color: "black" }} key={image}>
+                                      Packshot image: {image.image}
+                                    </div>
+                                  </div>
+
+                                  <span
+                                    color="red"
+                                    style={{ cursor: "pointer" }}
+                                    onClick={() => removePackshot(index)}
+                                  >
+                                    ×
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
                         <div>
@@ -1103,11 +1149,12 @@ const Config = () => {
                                 onChange={handleSkuChange}
                                 value={skuData.sku}
                               />
+
                               <button
                                 className="btn add-btn"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  setConfigState((prev) => ({
+                                  setSelectedRow((prev) => ({
                                     ...prev,
                                     images: [...prev.images, skuData],
                                   }));
@@ -1116,6 +1163,42 @@ const Config = () => {
                               >
                                 <i className="fa fa-plus" /> ADD packshot
                               </button>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                {selectedRow.images.map((image, index) => (
+                                  <div
+                                    key={image.image + index}
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: "12px",
+                                    }}
+                                  >
+                                    <div>
+                                      <div style={{ color: "black" }}>
+                                        Packshot sku: {image.sku}
+                                      </div>
+                                      <div style={{ color: "black" }}>
+                                        Packshot image: {image.image}
+                                      </div>
+                                    </div>
+
+                                    <span
+                                      color="red"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() =>
+                                        removePackshot(index, true)
+                                      }
+                                    >
+                                      ×
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
                           <div>
