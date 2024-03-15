@@ -29,11 +29,9 @@ const Config = () => {
   const [configState, setConfigState] = useState(emptyConfig);
   const [selectedRow, setSelectedRow] = useState(null);
   const [skuData, setSkuData] = useState({ image: "", sku: "" });
-  const [showMerchants, setShowMerchants] = useState(false);
   const [step, setStep] = useState(1);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
@@ -52,10 +50,6 @@ const Config = () => {
       setStep(step - 1);
     } else {
     }
-  };
-
-  const toggleMerchants = () => {
-    setShowMerchants(!showMerchants);
   };
 
   useEffect(() => {
@@ -91,6 +85,12 @@ const Config = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const convertToCorrectType = (value) => {
+    if (value === "true") return true;
+    if (value === "false") return false;
+    return value;
   };
 
   const importConfig = (event) => {
@@ -245,7 +245,7 @@ const Config = () => {
       let temp = updatedConfig;
       keys.forEach((key, index) => {
         if (index === keys.length - 1) {
-          temp[key] = value;
+          temp[key] = convertToCorrectType(value);
         } else {
           if (!temp[key]) temp[key] = {};
           temp = temp[key];
