@@ -292,11 +292,18 @@ const Config = () => {
     }));
   };
 
-  const handleSortingSelect = (value) => {
-    setConfigState((prev) => ({
-      ...prev,
-      sorting: value,
-    }));
+  const handleSortingSelect = (value, edit = false) => {
+    if (edit) {
+      setSelectedRow((prev) => ({
+        ...prev,
+        sorting: value,
+      }));
+    } else {
+      setConfigState((prev) => ({
+        ...prev,
+        sorting: value,
+      }));
+    }
   };
 
   const save = () => {
@@ -1043,7 +1050,9 @@ const Config = () => {
                                 },
                               ]}
                               selectedValues={selectedRow.sorting}
-                              onChange={handleSortingSelect}
+                              onChange={(e) => {
+                                handleSortingSelect(e, true);
+                              }}
                             />
                             <Radio
                               name={"sortingPrefered"}

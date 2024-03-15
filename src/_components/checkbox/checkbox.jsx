@@ -1,12 +1,34 @@
-import React, { FC } from "react";
+import React, { useEffect, useState } from "react";
 
 const CheckboxGroup = ({ name, options, selectedValues, onChange, label }) => {
+  const [selectionOrder, setSelectionOrder] = useState([]);
+
   const handleCheckboxChange = (value) => {
-    const newSelectedValues = selectedValues.includes(value)
-      ? selectedValues.filter((v) => v !== value)
-      : [...selectedValues, value];
+    let newSelectedValues, newSelectionOrder;
+
+    if (selectedValues.includes(value)) {
+      newSelectedValues = selectedValues.filter((v) => v !== value);
+      newSelectionOrder = selectionOrder.filter((v) => v !== value);
+    } else {
+      newSelectedValues = [...selectedValues, value];
+      newSelectionOrder = [...selectionOrder, value];
+    }
+
     onChange(newSelectedValues);
+    setSelectionOrder(newSelectionOrder);
   };
+
+  const renderLabelWithOrder = (option) => {
+    const orderIndex = selectionOrder.indexOf(option.value) + 1;
+    return orderIndex ? `${orderIndex}. ${option.label}` : option.label;
+  };
+
+  useEffect(() => {
+    const initialOrder = options
+      .filter((option) => selectedValues.includes(option.value))
+      .map((option) => option.value);
+    setSelectionOrder(initialOrder);
+  }, []);
 
   return (
     <div className="checkbox-group-container">
@@ -25,7 +47,7 @@ const CheckboxGroup = ({ name, options, selectedValues, onChange, label }) => {
             htmlFor={`${name}-${option.value}`}
             className="checkbox-button-label"
           >
-            {option.label}
+            {renderLabelWithOrder(option)}
           </label>
         </div>
       ))}

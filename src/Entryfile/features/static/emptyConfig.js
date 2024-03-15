@@ -2,7 +2,7 @@ export const emptyConfig = {
   id: 0,
   layout: 1,
   layoutOffline: 1,
-  sorting: [1, 3, 4],
+  sorting: [],
   ratings: true,
   merchants: [1, 3, 5, 12],
   merchantsSponsored: [3],
