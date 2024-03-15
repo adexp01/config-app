@@ -251,3 +251,7 @@ td.ant-table-column-sort {
 .modal-content {
   width: 100vw !important;
 }
+
+.selected-row {
+  background-color: #dadada !important;
+}

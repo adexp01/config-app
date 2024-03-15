@@ -464,6 +464,9 @@ const Config = () => {
                     columns={columns}
                     dataSource={searchQuery.length > 0 ? filteredData : configs}
                     rowKey={(record) => record.id}
+                    rowClassName={(record) =>
+                      record.id === selectedRow?.id ? "selected-row" : ""
+                    }
                   />
                 </div>
               </div>
@@ -792,17 +795,14 @@ const Config = () => {
                     )}
 
                     {showAddModal && step === 2 && (
-                      <>
-                        <div className="merchant-wrapper">
-                          <Table
-                            dataSource={merchantsList}
-                            columns={merchantColumns}
-                            rowKey="id"
-                            pagination={false}
-                            sticky={true}
-                          />
-                        </div>
-
+                      <div className="merchant-wrapper">
+                        <Table
+                          dataSource={merchantsList}
+                          columns={merchantColumns}
+                          rowKey="id"
+                          pagination={false}
+                          sticky={true}
+                        />
                         <div className="submit-section">
                           <button
                             className="btn btn-primary submit-btn"
@@ -827,7 +827,7 @@ const Config = () => {
                             Submit
                           </button>
                         </div>
-                      </>
+                      </div>
                     )}
                   </form>
                 </div>
@@ -1167,16 +1167,14 @@ const Config = () => {
                       </>
                     )}
                     {selectedRow && showEditModal && step === 2 && (
-                      <>
-                        <div className="merchant-wrapper">
-                          <Table
-                            dataSource={merchantsList}
-                            columns={merchantColumnsEdit}
-                            rowKey="id"
-                            pagination={false}
-                            sticky={true}
-                          />
-                        </div>
+                      <div className="merchant-wrapper">
+                        <Table
+                          dataSource={merchantsList}
+                          columns={merchantColumnsEdit}
+                          rowKey="id"
+                          pagination={false}
+                          sticky={true}
+                        />
                         <div className="submit-section">
                           <button
                             className="btn btn-primary submit-btn"
@@ -1201,7 +1199,7 @@ const Config = () => {
                             Save
                           </button>
                         </div>
-                      </>
+                      </div>
                     )}
                   </form>
                 </div>
