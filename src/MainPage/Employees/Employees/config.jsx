@@ -700,8 +700,10 @@ const Config = () => {
                             name={"sortingPreferred"}
                             label="Prefered sorting"
                             options={[
-                              { value: "1", label: "Partner" },
-                              { value: "2", label: "Preferred merchants" },
+                              { value: "2", label: "Partner" },
+                              { value: "1", label: "None" },
+
+                              { value: "3", label: "Preferred merchants" },
                             ]}
                             selectedOption={configState.sortingPreferred}
                             onChange={handleChange}
@@ -743,15 +745,47 @@ const Config = () => {
                               onChange={handleSkuChange}
                               value={skuData.sku}
                             />
+
+                            <InputField
+                              type={"number"}
+                              name={"width"}
+                              label={"Packshots per SKU width"}
+                              onChange={handleSkuChange}
+                              value={skuData.width}
+                            />
+                            <InputField
+                              type={"number"}
+                              name={"height"}
+                              label={"Packshots per SKU height"}
+                              onChange={handleSkuChange}
+                              value={skuData.height}
+                            />
+
                             <button
                               className="btn add-btn"
                               onClick={(e) => {
                                 e.preventDefault();
                                 setConfigState((prev) => ({
                                   ...prev,
-                                  images: [...prev.images, skuData],
+                                  images: [
+                                    ...prev.images,
+                                    {
+                                      ...skuData,
+                                      width: convertToCorrectType(
+                                        skuData.width
+                                      ),
+                                      height: convertToCorrectType(
+                                        skuData.height
+                                      ),
+                                    },
+                                  ],
                                 }));
-                                setSkuData({ image: "", sku: "" });
+                                setSkuData({
+                                  image: "",
+                                  sku: "",
+                                  width: 0,
+                                  height: 0,
+                                });
                               }}
                             >
                               <i className="fa fa-plus" /> ADD packshot
@@ -1105,11 +1139,10 @@ const Config = () => {
                               name={"sortingPreferred"}
                               label="Prefered sorting"
                               options={[
-                                { value: "1", label: "Partner" },
-                                {
-                                  value: "2",
-                                  label: "Preferred merchants",
-                                },
+                                { value: "2", label: "Partner" },
+                                { value: "1", label: "None" },
+
+                                { value: "3", label: "Preferred merchants" },
                               ]}
                               selectedOption={selectedRow.sortingPreferred}
                               onChange={(e) => handleChange(e, true)}
@@ -1151,15 +1184,46 @@ const Config = () => {
                                 value={skuData.sku}
                               />
 
+                              <InputField
+                                type={"number"}
+                                name={"width"}
+                                label={"Packshots per SKU width"}
+                                onChange={handleSkuChange}
+                                value={skuData.width}
+                              />
+                              <InputField
+                                type={"number"}
+                                name={"height"}
+                                label={"Packshots per SKU height"}
+                                onChange={handleSkuChange}
+                                value={skuData.height}
+                              />
+
                               <button
                                 className="btn add-btn"
                                 onClick={(e) => {
                                   e.preventDefault();
                                   setSelectedRow((prev) => ({
                                     ...prev,
-                                    images: [...prev.images, skuData],
+                                    images: [
+                                      ...prev.images,
+                                      {
+                                        ...skuData,
+                                        width: convertToCorrectType(
+                                          skuData.width
+                                        ),
+                                        height: convertToCorrectType(
+                                          skuData.height
+                                        ),
+                                      },
+                                    ],
                                   }));
-                                  setSkuData({ image: "", sku: "" });
+                                  setSkuData({
+                                    image: "",
+                                    sku: "",
+                                    height: 0,
+                                    width: 0,
+                                  });
                                 }}
                               >
                                 <i className="fa fa-plus" /> ADD packshot
