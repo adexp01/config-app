@@ -3,15 +3,12 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Header from "../../../initialpage/Sidebar/header";
 import Sidebar from "../../../initialpage/Sidebar/sidebar";
-import { Table, Checkbox, Select } from "antd";
+import { Table, Checkbox } from "antd";
 import "antd/dist/antd.css";
 import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
 import { useSelector, useDispatch } from "react-redux";
 import { emptyConfig } from "../../../Entryfile/features/static/emptyConfig";
-import Radio from "../../../_components/radio/radio";
-import InputField from "../../../_components/inputField/inputField";
-import CheckboxGroup from "../../../_components/checkbox/checkbox";
 
 import {
   addConfig,
@@ -19,9 +16,11 @@ import {
   updateConfig,
 } from "../../../Entryfile/features/configsSlice";
 import faker from "faker";
-import { merchantsList } from "../../../Entryfile/features/static/merchantsList";
-import ClientProfile from "../../Pages/Profile/clientprofile";
 import EmployeeProfile from "./employeeprofile";
+import { downloadConfig } from "../../../utils/downloadConfig";
+import { convertToCorrectType } from "../../../utils/convertType";
+import AddConfigModal from "./Modals/AddConfigModal";
+import EditConfigModal from "./Modals/EditConfigModal";
 
 const Config = () => {
   const [menu, setMenu] = useState(false);
@@ -34,10 +33,6 @@ const Config = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
-
   const nextStep = () => {
     if (step === 2) {
     } else {
@@ -52,17 +47,6 @@ const Config = () => {
     }
   };
 
-  useEffect(() => {
-    if (searchQuery.length === 0) {
-      setFilteredData(configs);
-    } else {
-      const filtered = configs.filter((config) =>
-        config.text.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredData(filtered);
-    }
-  }, [searchQuery]);
-
   const toggleMobileMenu = () => {
     setMenu(!menu);
   };
@@ -73,26 +57,6 @@ const Config = () => {
     const savedData = JSON.parse(config);
     savedData.map((data) => dispatch(addConfig(data)));
   }, []);
-
-  const downloadConfig = (config) => {
-    const dataStr = JSON.stringify(config, null, 2);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "config.json";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const convertToCorrectType = (value) => {
-    if (value === "true") return true;
-    if (value === "false") return false;
-    const numericValue = Number(value);
-    return isNaN(numericValue) ? value : numericValue;
-  };
 
   const importConfig = (event) => {
     const reader = new FileReader();
@@ -136,102 +100,6 @@ const Config = () => {
         : [...prev.merchantsPrefered, id],
     }));
   };
-
-  const merchantColumns = [
-    {
-      title: "Apotheke",
-      dataIndex: "apotheke",
-      key: "apotheke",
-    },
-    {
-      title: "Restrict",
-      key: "include",
-      render: (_, record) => (
-        <Checkbox
-          checked={configState.merchants.includes(record.id)}
-          onChange={() => selectMerchant(record.id)}
-        />
-      ),
-    },
-    {
-      title: "Exclude",
-      key: "exclude",
-      render: (_, record) => (
-        <Checkbox
-          checked={configState.merchants.includes(-record.id)}
-          onChange={() => selectMerchant(-record.id)}
-        />
-      ),
-    },
-    {
-      title: "Highlight",
-      key: "highlight",
-      render: (_, record) => (
-        <Checkbox
-          checked={configState.merchantsSponsored.includes(record.id)}
-          onChange={() => highlightMerchant(record.id)}
-        />
-      ),
-    },
-    {
-      title: "Prefer",
-      key: "prefer",
-      render: (_, record) => (
-        <Checkbox
-          checked={configState.merchantsPrefered.includes(record.id)}
-          onChange={() => preferedMerchant(record.id)}
-        />
-      ),
-    },
-  ];
-
-  const merchantColumnsEdit = [
-    {
-      title: "Apotheke",
-      dataIndex: "apotheke",
-      key: "apotheke",
-    },
-    {
-      title: "Restrict",
-      key: "include",
-      render: (_, record) => (
-        <Checkbox
-          checked={selectedRow.merchants.includes(record.id)}
-          onChange={() => selectMerchantEdit(record.id)}
-        />
-      ),
-    },
-    {
-      title: "Exclude",
-      key: "exclude",
-      render: (_, record) => (
-        <Checkbox
-          checked={selectedRow.merchants.includes(-record.id)}
-          onChange={() => selectMerchantEdit(-record.id)}
-        />
-      ),
-    },
-    {
-      title: "Highlight",
-      key: "highlight",
-      render: (_, record) => (
-        <Checkbox
-          checked={selectedRow.merchantsSponsored.includes(record.id)}
-          onChange={() => highlightMerchantEdit(record.id)}
-        />
-      ),
-    },
-    {
-      title: "Prefer",
-      key: "prefer",
-      render: (_, record) => (
-        <Checkbox
-          checked={selectedRow.merchantsPrefered.includes(record.id)}
-          onChange={() => preferedMerchantEdit(record.id)}
-        />
-      ),
-    },
-  ];
 
   const handleChange = (e, edit = false) => {
     const { name, value } = e.target;
@@ -334,6 +202,46 @@ const Config = () => {
     setSelectedRow(null);
   };
 
+  const addPackshot = () => {
+    setConfigState((prev) => ({
+      ...prev,
+      images: [
+        ...prev.images,
+        {
+          ...skuData,
+          width: convertToCorrectType(skuData.width),
+          height: convertToCorrectType(skuData.height),
+        },
+      ],
+    }));
+    setSkuData({
+      image: "",
+      sku: "",
+      width: 0,
+      height: 0,
+    });
+  };
+
+  const editPackshot = () => {
+    setSelectedRow((prev) => ({
+      ...prev,
+      images: [
+        ...prev.images,
+        {
+          ...skuData,
+          width: convertToCorrectType(skuData.width),
+          height: convertToCorrectType(skuData.height),
+        },
+      ],
+    }));
+    setSkuData({
+      image: "",
+      sku: "",
+      height: 0,
+      width: 0,
+    });
+  };
+
   const columns = [
     {
       title: "Config ID",
@@ -408,15 +316,7 @@ const Config = () => {
             <title>Config - HRMS Admin Template</title>
             <meta name="description" content="Login page" />
           </Helmet>
-          {/* <div className="mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by text..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div> */}
+
           {/* Page Content */}
           <div className="content container-fluid">
             {/* Page Header */}
@@ -482,7 +382,7 @@ const Config = () => {
                     }}
                     style={{ overflowX: "auto" }}
                     columns={columns}
-                    dataSource={searchQuery.length > 0 ? filteredData : configs}
+                    dataSource={configs}
                     rowKey={(record) => record.id}
                     rowClassName={(record) =>
                       record.id === selectedRow?.id ? "selected-row" : ""
@@ -494,875 +394,51 @@ const Config = () => {
           </div>
           {/* /Page Content */}
           {/* Add Config Modal */}
-          <div
-            id="add_department"
-            className="modal custom-modal fade"
-            role="dialog"
-          >
-            <div className="modal-dialog modal-dialog-centered" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Configurations</h5>
-                  <button
-                    type="button"
-                    className="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowAddModal(false);
-                    }}
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    {showAddModal && step === 1 && (
-                      <div className="create-config-wrapper">
-                        <div className="create-config-container">
-                          <InputField
-                            type={"color"}
-                            name={"style.btnColor"}
-                            label={"Color of the buttons"}
-                            onChange={handleChange}
-                            value={configState.style.btnColor}
-                          />
-                          <InputField
-                            type={"color"}
-                            name={"style.btnTextColor"}
-                            label={"Color of the buttons text"}
-                            onChange={handleChange}
-                            value={configState.style.btnTextColor}
-                          />
-                          <InputField
-                            type={"color"}
-                            name={"style.textColor"}
-                            label={"Color of the texts"}
-                            onChange={handleChange}
-                            value={configState.style.textColor}
-                          />
-                          <InputField
-                            type={"color"}
-                            name={"style.headerTextColor"}
-                            label={"Color of text in the header"}
-                            onChange={handleChange}
-                            value={configState.style.headerTextColor}
-                          />
-                          <InputField
-                            type={"color"}
-                            name={"style.primaryColor"}
-                            label={"Color of the layout"}
-                            onChange={handleChange}
-                            value={configState.style.primaryColor}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <Radio
-                            name={"posBranding"}
-                            label="Selection of POS branding"
-                            options={[
-                              { value: "1", label: "Round Icons" },
-                              { value: "2", label: "Logos" },
-                            ]}
-                            selectedOption={configState.posBranding}
-                            onChange={handleChange}
-                          />
-                          <InputField
-                            type={"text"}
-                            name={"brand.logoUrl"}
-                            label={"Brand logo URL"}
-                            onChange={handleChange}
-                            value={configState.brand.logoUrl}
-                          />
-                          <InputField
-                            type={"number"}
-                            name={"brand.logoFormat.width"}
-                            label={"Width"}
-                            onChange={handleChange}
-                            value={configState.brand.logoFormat.width}
-                          />
-                          <InputField
-                            type={"number"}
-                            name={"brand.logoFormat.height"}
-                            label={"Height"}
-                            onChange={handleChange}
-                            value={configState.brand.logoFormat.height}
-                          />
-                          <Radio
-                            name={"brand.logoFormat.align"}
-                            label="Alignment of the logo"
-                            options={[
-                              { value: "left", label: "left" },
-                              { value: "right", label: "right" },
-                              { value: "center", label: "center" },
-                              { value: "justify", label: "justify" },
-                              { value: "initial", label: "initial" },
-                            ]}
-                            selectedOption={configState.brand.logoFormat.align}
-                            onChange={handleChange}
-                          />
-                        </div>
-
-                        <div className="create-config-container">
-                          <Radio
-                            name={"layout"}
-                            label="Selection of the layout"
-                            options={[
-                              { value: "1", label: "Inline" },
-                              { value: "2", label: "Pop Up" },
-                            ]}
-                            selectedOption={configState.layout}
-                            onChange={handleChange}
-                          />
-                          <Radio
-                            name={"layoutOffline"}
-                            label="Selection layout offline
-            merchants"
-                            options={[
-                              { value: "1", label: "no separation" },
-                              { value: "2", label: "tabed (online/offline)" },
-                            ]}
-                            selectedOption={configState.layoutOffline}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <Radio
-                            name={"layoutMultiselect"}
-                            label="Position of sku selector"
-                            options={[
-                              { value: "top", label: "top" },
-                              { value: "inline", label: "inline" },
-                            ]}
-                            selectedOption={configState.layoutMultiselect}
-                            onChange={handleChange}
-                          />
-                          <InputField
-                            type={"text"}
-                            name={"text"}
-                            label={"Offer more information"}
-                            onChange={handleChange}
-                            value={configState.text}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <Radio
-                            name={"price"}
-                            label="Show price"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.price}
-                            onChange={handleChange}
-                          />
-
-                          <Radio
-                            name={"stock"}
-                            label="Show availability"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.stock}
-                            onChange={handleChange}
-                          />
-                          <Radio
-                            name={"ratings"}
-                            label="Show ratings"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.ratings}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <CheckboxGroup
-                            name={"sorting"}
-                            label="Sorting"
-                            options={[
-                              { value: 1, label: "Price ascending" },
-                              { value: 3, label: "Ratings" },
-                              { value: 4, label: "Ratings amount" },
-                              { value: 5, label: "Random" },
-                              {
-                                value: 6,
-                                label: "List of preferred merchants",
-                              },
-                            ]}
-                            selectedValues={configState.sorting}
-                            onChange={handleSortingSelect}
-                          />
-                          <Radio
-                            name={"sortingPreferred"}
-                            label="Prefered sorting"
-                            options={[
-                              { value: "2", label: "Partner" },
-                              { value: "1", label: "None" },
-
-                              { value: "3", label: "Preferred merchants" },
-                            ]}
-                            selectedOption={configState.sortingPreferred}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <Radio
-                            name={"pagination"}
-                            label="Pagination"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.pagination}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="create-config-container">
-                          <InputField
-                            type={"text"}
-                            name={"image"}
-                            label={"Packshot of the product"}
-                            onChange={handleChange}
-                            value={configState.image}
-                          />
-
-                          <div>
-                            <InputField
-                              type={"text"}
-                              name={"image"}
-                              label={"Packshots per SKU image URL"}
-                              onChange={handleSkuChange}
-                              value={skuData.image}
-                            />
-                            <InputField
-                              type={"text"}
-                              name={"sku"}
-                              label={"Packshots per SKU data"}
-                              onChange={handleSkuChange}
-                              value={skuData.sku}
-                            />
-
-                            <InputField
-                              type={"number"}
-                              name={"width"}
-                              label={"Packshots per SKU width"}
-                              onChange={handleSkuChange}
-                              value={skuData.width}
-                            />
-                            <InputField
-                              type={"number"}
-                              name={"height"}
-                              label={"Packshots per SKU height"}
-                              onChange={handleSkuChange}
-                              value={skuData.height}
-                            />
-
-                            <button
-                              className="btn add-btn"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setConfigState((prev) => ({
-                                  ...prev,
-                                  images: [
-                                    ...prev.images,
-                                    {
-                                      ...skuData,
-                                      width: convertToCorrectType(
-                                        skuData.width
-                                      ),
-                                      height: convertToCorrectType(
-                                        skuData.height
-                                      ),
-                                    },
-                                  ],
-                                }));
-                                setSkuData({
-                                  image: "",
-                                  sku: "",
-                                  width: 0,
-                                  height: 0,
-                                });
-                              }}
-                            >
-                              <i className="fa fa-plus" /> ADD packshot
-                            </button>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "column",
-                              }}
-                            >
-                              {configState.images.map((image, index) => (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "12px",
-                                  }}
-                                >
-                                  <div>
-                                    <div style={{ color: "black" }} key={image}>
-                                      Packshot sku: {image.sku}
-                                    </div>
-                                    <div style={{ color: "black" }} key={image}>
-                                      Packshot image: {image.image}
-                                    </div>
-                                  </div>
-
-                                  <span
-                                    color="red"
-                                    style={{ cursor: "pointer" }}
-                                    onClick={() => removePackshot(index)}
-                                  >
-                                    ×
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <InputField
-                            type={"number"}
-                            name={"style.zIndex"}
-                            label={"Layer priority"}
-                            onChange={handleChange}
-                            value={configState.style.zIndex}
-                          />
-
-                          <Radio
-                            name={"label.grouping"}
-                            label="Tab Label Offline/Online"
-                            options={[
-                              { value: "1", label: "Online/Offline" },
-                              {
-                                value: "2",
-                                label: "Online-Apotheken/Apotheken vor Ort",
-                              },
-                            ]}
-                            selectedOption={configState.label.grouping}
-                            onChange={handleChange}
-                          />
-                          <Radio
-                            name={"label.header"}
-                            label="Tab Label Visibility"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.label.header}
-                            onChange={handleChange}
-                          />
-                          <Radio
-                            name={"label.headerIcon"}
-                            label="Tab Label Icon Visibility"
-                            options={[
-                              { value: "true", label: "true" },
-                              { value: "false", label: "false" },
-                            ]}
-                            selectedOption={configState.label.headerIcon}
-                            onChange={handleChange}
-                          />
-                          <div className="submit-section">
-                            <button
-                              className="btn btn-primary submit-btn"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                nextStep();
-                              }}
-                            >
-                              Next step
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {showAddModal && step === 2 && (
-                      <div className="merchant-wrapper">
-                        <Table
-                          dataSource={merchantsList}
-                          columns={merchantColumns}
-                          rowKey="id"
-                          pagination={false}
-                          sticky={true}
-                        />
-                        <div className="submit-section">
-                          <button
-                            className="btn btn-primary submit-btn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              prevStep();
-                            }}
-                          >
-                            Prev step
-                          </button>
-                          <button
-                            className="btn btn-primary submit-btn"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              save();
-                              setShowAddModal(false);
-                              setStep(1);
-                            }}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AddConfigModal
+            open={showAddModal}
+            step={step}
+            close={() => {
+              setShowAddModal(false);
+            }}
+            configState={configState}
+            addPackshot={addPackshot}
+            removePackshot={removePackshot}
+            handleChange={handleChange}
+            save={save}
+            prevStep={prevStep}
+            nextStep={nextStep}
+            handleSkuChange={handleSkuChange}
+            skuData={skuData}
+            setStep={setStep}
+            handleSortingSelect={handleSortingSelect}
+            selectMerchant={selectMerchant}
+            highlightMerchant={highlightMerchant}
+            preferedMerchant={preferedMerchant}
+          />
 
           {/* /Add Config Modal */}
           {/* Edit Config Modal */}
-          <div
-            id="edit_department"
-            className="modal custom-modal fade"
-            role="dialog"
-          >
-            <div className="modal-dialog modal-dialog-centered" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title">Edit Config</h5>
-                  <button
-                    type="button"
-                    className="close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowEditModal(false);
-                    }}
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  <form>
-                    {selectedRow && showEditModal && step === 1 && (
-                      <>
-                        <div className="create-config-wrapper">
-                          <div className="create-config-container">
-                            <InputField
-                              type={"color"}
-                              name={"style.btnColor"}
-                              label={"Color of the buttons"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.btnColor}
-                            />
-                            <InputField
-                              type={"color"}
-                              name={"style.btnTextColor"}
-                              label={"Color of the buttons text"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.btnTextColor}
-                            />
-                            <InputField
-                              type={"color"}
-                              name={"style.textColor"}
-                              label={"Color of the texts"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.textColor}
-                            />
-                            <InputField
-                              type={"color"}
-                              name={"style.headerTextColor"}
-                              label={"Color of text in the header"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.headerTextColor}
-                            />
-                            <InputField
-                              type={"color"}
-                              name={"style.primaryColor"}
-                              label={"Color of the layout"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.primaryColor}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <Radio
-                              name={"posBranding"}
-                              label="Selection of POS branding"
-                              options={[
-                                { value: "1", label: "Round Icons" },
-                                { value: "2", label: "Logos" },
-                              ]}
-                              selectedOption={selectedRow.posBranding}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <InputField
-                              type={"text"}
-                              name={"brand.logoUrl"}
-                              label={"Brand logo URL"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.brand.logoUrl}
-                            />
-                            <InputField
-                              type={"number"}
-                              name={"brand.logoFormat.width"}
-                              label={"Width"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.brand.logoFormat.width}
-                            />
-                            <InputField
-                              type={"number"}
-                              name={"brand.logoFormat.height"}
-                              label={"Height"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.brand.logoFormat.height}
-                            />
-                            <Radio
-                              name={"brand.logoFormat.align"}
-                              label="Alignment of the logo"
-                              options={[
-                                { value: "left", label: "left" },
-                                { value: "right", label: "right" },
-                                { value: "center", label: "center" },
-                                { value: "justify", label: "justify" },
-                                { value: "initial", label: "initial" },
-                              ]}
-                              selectedOption={
-                                selectedRow.brand.logoFormat.align
-                              }
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-
-                          <div className="create-config-container">
-                            <Radio
-                              name={"layout"}
-                              label="Selection of the layout"
-                              options={[
-                                { value: "1", label: "Inline" },
-                                { value: "2", label: "Pop Up" },
-                              ]}
-                              selectedOption={selectedRow.layout}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <Radio
-                              name={"layoutOffline"}
-                              label="Selection layout offline
-            merchants"
-                              options={[
-                                { value: "1", label: "no separation" },
-                                {
-                                  value: "2",
-                                  label: "tabed (online/offline)",
-                                },
-                              ]}
-                              selectedOption={selectedRow.layoutOffline}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <Radio
-                              name={"layoutMultiselect"}
-                              label="Position of sku selector"
-                              options={[
-                                { value: "top", label: "top" },
-                                { value: "inline", label: "inline" },
-                              ]}
-                              selectedOption={selectedRow.layoutMultiselect}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <InputField
-                              type={"text"}
-                              name={"text"}
-                              label={"Offer more information"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.text}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <Radio
-                              name={"price"}
-                              label="Show price"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.price}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-
-                            <Radio
-                              name={"stock"}
-                              label="Show availability"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.stock}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <Radio
-                              name={"ratings"}
-                              label="Show ratings"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.ratings}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <CheckboxGroup
-                              name={"sorting"}
-                              label="Sorting"
-                              options={[
-                                { value: 1, label: "Price ascending" },
-                                { value: 3, label: "Ratings" },
-                                { value: 4, label: "Ratings amount" },
-                                { value: 5, label: "Random" },
-                                {
-                                  value: 6,
-                                  label: "List of preferred merchants",
-                                },
-                              ]}
-                              selectedValues={selectedRow.sorting}
-                              onChange={(e) => {
-                                handleSortingSelect(e, true);
-                              }}
-                            />
-                            <Radio
-                              name={"sortingPreferred"}
-                              label="Prefered sorting"
-                              options={[
-                                { value: "2", label: "Partner" },
-                                { value: "1", label: "None" },
-
-                                { value: "3", label: "Preferred merchants" },
-                              ]}
-                              selectedOption={selectedRow.sortingPreferred}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <Radio
-                              name={"pagination"}
-                              label="Pagination"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.pagination}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-                          <div className="create-config-container">
-                            <InputField
-                              type={"text"}
-                              name={"image"}
-                              label={"Packshot of the product"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.image}
-                            />
-                            <div>
-                              <InputField
-                                type={"text"}
-                                name={"image"}
-                                label={"Packshots per SKU Image URL"}
-                                onChange={handleSkuChange}
-                                value={skuData.image}
-                              />
-                              <InputField
-                                type={"text"}
-                                name={"sku"}
-                                label={"Packshots per SKU data "}
-                                onChange={handleSkuChange}
-                                value={skuData.sku}
-                              />
-
-                              <InputField
-                                type={"number"}
-                                name={"width"}
-                                label={"Packshots per SKU width"}
-                                onChange={handleSkuChange}
-                                value={skuData.width}
-                              />
-                              <InputField
-                                type={"number"}
-                                name={"height"}
-                                label={"Packshots per SKU height"}
-                                onChange={handleSkuChange}
-                                value={skuData.height}
-                              />
-
-                              <button
-                                className="btn add-btn"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setSelectedRow((prev) => ({
-                                    ...prev,
-                                    images: [
-                                      ...prev.images,
-                                      {
-                                        ...skuData,
-                                        width: convertToCorrectType(
-                                          skuData.width
-                                        ),
-                                        height: convertToCorrectType(
-                                          skuData.height
-                                        ),
-                                      },
-                                    ],
-                                  }));
-                                  setSkuData({
-                                    image: "",
-                                    sku: "",
-                                    height: 0,
-                                    width: 0,
-                                  });
-                                }}
-                              >
-                                <i className="fa fa-plus" /> ADD packshot
-                              </button>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "column",
-                                }}
-                              >
-                                {selectedRow.images.map((image, index) => (
-                                  <div
-                                    key={image.image + index}
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      gap: "12px",
-                                    }}
-                                  >
-                                    <div>
-                                      <div style={{ color: "black" }}>
-                                        Packshot sku: {image.sku}
-                                      </div>
-                                      <div style={{ color: "black" }}>
-                                        Packshot image: {image.image}
-                                      </div>
-                                    </div>
-
-                                    <span
-                                      color="red"
-                                      style={{ cursor: "pointer" }}
-                                      onClick={() =>
-                                        removePackshot(index, true)
-                                      }
-                                    >
-                                      ×
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                          <div>
-                            <InputField
-                              type={"number"}
-                              name={"style.zIndex"}
-                              label={"Layer priority"}
-                              onChange={(e) => handleChange(e, true)}
-                              value={selectedRow.style.zIndex}
-                            />
-
-                            <Radio
-                              name={"label.grouping"}
-                              label="Tab Label Offline/Online"
-                              options={[
-                                { value: "1", label: "Online/Offline" },
-                                {
-                                  value: "2",
-                                  label: "Online-Apotheken/Apotheken vor Ort",
-                                },
-                              ]}
-                              selectedOption={selectedRow.label.grouping}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <Radio
-                              name={"label.header"}
-                              label="Tab Label Visibility"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.label.header}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                            <Radio
-                              name={"label.headerIcon"}
-                              label="Tab Label Icon Visibility"
-                              options={[
-                                { value: "true", label: "true" },
-                                { value: "false", label: "false" },
-                              ]}
-                              selectedOption={selectedRow.label.headerIcon}
-                              onChange={(e) => handleChange(e, true)}
-                            />
-                          </div>
-                        </div>
-                        <div className="submit-section">
-                          <button
-                            className="btn btn-primary submit-btn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              nextStep();
-                            }}
-                          >
-                            Next step
-                          </button>
-                        </div>
-                      </>
-                    )}
-                    {selectedRow && showEditModal && step === 2 && (
-                      <div className="merchant-wrapper">
-                        <Table
-                          dataSource={merchantsList}
-                          columns={merchantColumnsEdit}
-                          rowKey="id"
-                          pagination={false}
-                          sticky={true}
-                        />
-                        <div className="submit-section">
-                          <button
-                            className="btn btn-primary submit-btn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              prevStep();
-                            }}
-                          >
-                            Prev step
-                          </button>
-                          <button
-                            className="btn btn-primary submit-btn"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              saveEdit();
-                              setShowEditModal(false);
-                              setStep(1);
-                            }}
-                          >
-                            Save
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditConfigModal
+            open={showEditModal}
+            close={() => {
+              setShowEditModal(false);
+            }}
+            step={step}
+            selectedRow={selectedRow}
+            handleChange={handleChange}
+            handleSortingSelect={handleSortingSelect}
+            handleSkuChange={handleSkuChange}
+            skuData={skuData}
+            editPackshot={editPackshot}
+            prevStep={prevStep}
+            nextStep={nextStep}
+            setStep={setStep}
+            removePackshot={removePackshot}
+            selectMerchantEdit={selectMerchantEdit}
+            highlightMerchantEdit={highlightMerchantEdit}
+            preferedMerchantEdit={preferedMerchantEdit}
+            saveEdit={saveEdit}
+          />
           {/* /Edit Config Modal */}
           {/* Delete Config Modal */}
 
