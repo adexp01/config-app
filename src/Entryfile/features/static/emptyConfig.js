@@ -26,7 +26,7 @@ export const emptyConfig = {
     primaryColor: "#00449e",
     textColor: "#00449e",
     headerTextColor: "#00449e",
-    zIndex: 88,
+    zIndex: 0,
   },
   brand: {
     logoUrl: "https://soventol.de/media/2022/06/Soventol_Gel_FS.jpg",
@@ -38,9 +38,9 @@ export const emptyConfig = {
   },
   layoutMultiselect: "top",
   text: "some text",
-  price: false,
-  stock: false,
-  sortingPrefered: 1,
+  price: true,
+  stock: true,
+  sortingPreferred: 1,
   pagination: false,
-  label: { grouping: 1, header: true, headerIcon: true },
+  label: { grouping: 1, header: false, headerIcon: false },
 };

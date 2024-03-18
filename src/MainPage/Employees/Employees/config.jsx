@@ -90,7 +90,8 @@ const Config = () => {
   const convertToCorrectType = (value) => {
     if (value === "true") return true;
     if (value === "false") return false;
-    return value;
+    const numericValue = Number(value);
+    return isNaN(numericValue) ? value : numericValue;
   };
 
   const importConfig = (event) => {
@@ -143,7 +144,7 @@ const Config = () => {
       key: "apotheke",
     },
     {
-      title: "Include",
+      title: "Restrict",
       key: "include",
       render: (_, record) => (
         <Checkbox
@@ -191,7 +192,7 @@ const Config = () => {
       key: "apotheke",
     },
     {
-      title: "Include",
+      title: "Restrict",
       key: "include",
       render: (_, record) => (
         <Checkbox
@@ -248,7 +249,7 @@ const Config = () => {
           temp[key] = convertToCorrectType(value);
         } else {
           if (!temp[key]) temp[key] = {};
-          temp = temp[key];
+          temp = convertToCorrectType(temp[key]);
         }
       });
       return updatedConfig;
@@ -696,13 +697,13 @@ const Config = () => {
                             onChange={handleSortingSelect}
                           />
                           <Radio
-                            name={"sortingPrefered"}
+                            name={"sortingPreferred"}
                             label="Prefered sorting"
                             options={[
                               { value: "1", label: "Partner" },
                               { value: "2", label: "Preferred merchants" },
                             ]}
-                            selectedOption={configState.sortingPrefered}
+                            selectedOption={configState.sortingPreferred}
                             onChange={handleChange}
                           />
                         </div>
@@ -806,7 +807,7 @@ const Config = () => {
                               { value: "1", label: "Online/Offline" },
                               {
                                 value: "2",
-                                label: "Online-Apotheken/ Apothekenvor Ort",
+                                label: "Online-Apotheken/Apotheken vor Ort",
                               },
                             ]}
                             selectedOption={configState.label.grouping}
@@ -1101,7 +1102,7 @@ const Config = () => {
                               }}
                             />
                             <Radio
-                              name={"sortingPrefered"}
+                              name={"sortingPreferred"}
                               label="Prefered sorting"
                               options={[
                                 { value: "1", label: "Partner" },
@@ -1110,7 +1111,7 @@ const Config = () => {
                                   label: "Preferred merchants",
                                 },
                               ]}
-                              selectedOption={selectedRow.sortingPrefered}
+                              selectedOption={selectedRow.sortingPreferred}
                               onChange={(e) => handleChange(e, true)}
                             />
                           </div>
@@ -1217,7 +1218,7 @@ const Config = () => {
                                 { value: "1", label: "Online/Offline" },
                                 {
                                   value: "2",
-                                  label: "Online-Apotheken/ Apothekenvor Ort",
+                                  label: "Online-Apotheken/Apotheken vor Ort",
                                 },
                               ]}
                               selectedOption={selectedRow.label.grouping}

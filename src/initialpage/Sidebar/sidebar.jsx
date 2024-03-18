@@ -48,30 +48,6 @@ const Sidebar = (props) => {
             <nav className="greedys sidebar-horizantal" id="horizantal-sidebar">
               <ul className="list-inline-item list-unstyled links">
                 <li className="menu-title">
-                  <span>Main</span>
-                </li>
-                <li className="submenu">
-                  <i className="la la-dashboard" />{" "}
-                  <Link
-                    className={
-                      pathname.includes("main/dashboard") ? "active" : ""
-                    }
-                    to="/app/main/dashboard"
-                  >
-                    Admin Dashboard
-                  </Link>
-                  {isSideMenu == "dashboard" ? (
-                    <ul
-                      style={{
-                        display: isSideMenu == "dashboard" ? "block" : "none",
-                      }}
-                    ></ul>
-                  ) : (
-                    ""
-                  )}
-                </li>
-
-                <li className="menu-title">
                   <span>Config</span>
                 </li>
                 <li className="submenu">
@@ -80,7 +56,7 @@ const Sidebar = (props) => {
                     className={pathname.includes("config") ? "active" : ""}
                     to="/app/employee/config"
                   >
-                    Configs
+                    BUY NOW
                   </Link>
                   {isSideMenu == "employee" ? <ul></ul> : ""}
                 </li>
@@ -1321,30 +1297,6 @@ const Sidebar = (props) => {
             </nav>
             <ul className="sidebar-vertical" id="veritical-sidebar">
               <li className="menu-title">
-                <span>Main</span>
-              </li>
-              <li className="submenu">
-                <a
-                  href="#"
-                  className={isSideMenu == "dashboard" ? "subdrop" : ""}
-                  onClick={() =>
-                    toggleSidebar(isSideMenu == "dashboard" ? "" : "dashboard")
-                  }
-                >
-                  <i className="la la-dashboard" />{" "}
-                  <Link
-                    className={
-                      pathname.includes("main/dashboard") ? "active" : ""
-                    }
-                    to="/app/main/dashboard"
-                  >
-                    Admin Dashboard
-                  </Link>
-                </a>
-                {isSideMenu == "dashboard" ? <ul></ul> : ""}
-              </li>
-
-              <li className="menu-title">
                 <span>Config</span>
               </li>
               <li className="submenu">
@@ -1361,7 +1313,7 @@ const Sidebar = (props) => {
                       className={pathname.includes("config") ? "active" : ""}
                       to="/app/employee/config"
                     >
-                      Configs
+                      BUY NOW
                     </Link>
                   </li>
                 </a>
@@ -2063,147 +2015,6 @@ const Sidebar = (props) => {
           </div>
           <div className="sidebar-right">
             <div className="tab-content" id="v-pills-tabContent">
-              {isSideMenunew == "dashboard" ? (
-                <div
-                  className="tab-pane fade active show"
-                  id="v-pills-dashboard"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-dashboard-tab"
-                >
-                  <p>Dashboard</p>
-                  <ul>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("main/dashboard") ? "active" : ""
-                        }
-                        to="/app/main/dashboard"
-                      >
-                        Admin Dashboard
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                ""
-              )}
-              {isSideMenu == "apps" ? (
-                <div
-                  className="tab-pane fade active show"
-                  id="v-pills-apps"
-                  role="tabpanel"
-                  aria-labelledby="v-pills-apps-tab"
-                >
-                  <p>App</p>
-                  <ul>
-                    <li>
-                      <Link
-                        onClick={() =>
-                          localStorage.setItem("minheight", "true")
-                        }
-                        to="/conversation/chat"
-                      >
-                        Chat
-                      </Link>
-                    </li>
-                    <li className="submenu">
-                      <a
-                        href="#"
-                        className={level2Menu == "calls" ? "subdrop" : ""}
-                        onClick={() =>
-                          toggleLvelTwo(level2Menu == "calls" ? "" : "calls")
-                        }
-                      >
-                        <span> Calls</span>
-                      </a>
-                      {level2Menu == "calls" ? (
-                        <ul>
-                          <li>
-                            <Link
-                              onClick={() =>
-                                localStorage.setItem("minheight", "true")
-                              }
-                              to="/conversation/voice-call"
-                            >
-                              Voice Call
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              onClick={() =>
-                                localStorage.setItem("minheight", "true")
-                              }
-                              to="/conversation/video-call"
-                            >
-                              Video Call
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              onClick={() =>
-                                localStorage.setItem("minheight", "true")
-                              }
-                              to="/conversation/outgoing-call"
-                            >
-                              Outgoing Call
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              onClick={() =>
-                                localStorage.setItem("minheight", "true")
-                              }
-                              to="/conversation/incoming-call"
-                            >
-                              Incoming Call
-                            </Link>
-                          </li>
-                        </ul>
-                      ) : (
-                        ""
-                      )}
-                    </li>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("apps/calendar") ? "active" : ""
-                        }
-                        to="/app/apps/calendar"
-                      >
-                        Calendar
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        onClick={() =>
-                          localStorage.setItem("minheight", "true")
-                        }
-                        className={
-                          pathname.includes("contacts") ? "active" : ""
-                        }
-                        to="/app/apps/contacts"
-                      >
-                        Contacts
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/email/inbox">Email</Link>
-                    </li>
-                    <li>
-                      <Link
-                        className={
-                          pathname.includes("file-manager") ? "active" : ""
-                        }
-                        to="/app/apps/file-manager"
-                      >
-                        File Manager
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                ""
-              )}
               {isSideMenu == "employee" ? (
                 <div
                   className="tab-pane fade active show"
