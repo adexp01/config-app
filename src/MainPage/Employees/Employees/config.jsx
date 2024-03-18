@@ -9,6 +9,7 @@ import { itemRender, onShowSizeChange } from "../../paginationfunction";
 import "../../antdstyle.css";
 import { useSelector, useDispatch } from "react-redux";
 import { emptyConfig } from "../../../Entryfile/features/static/emptyConfig";
+import produce from "immer";
 
 import {
   addConfig,
@@ -103,32 +104,38 @@ const Config = () => {
 
   const handleChange = (e, edit = false) => {
     const { name, value } = e.target;
-
-    const deepCloneObject = (obj) => {
-      return JSON.parse(JSON.stringify(obj));
-    };
-
-    const keys = name.split(".");
-    const changeCb = (prevConfig) => {
-      let updatedConfig = deepCloneObject(prevConfig);
-      let temp = updatedConfig;
-      keys.forEach((key, index) => {
-        if (index === keys.length - 1) {
-          temp[key] = convertToCorrectType(value);
-        } else {
-          if (!temp[key]) temp[key] = {};
-          temp = convertToCorrectType(temp[key]);
-        }
-      });
-      return updatedConfig;
-    };
     if (edit) {
-      setSelectedRow((prev) => changeCb(prev));
+      setSelectedRow((prev) =>
+        produce(prev, (draft) => {
+          let temp = draft;
+          const keys = name.split(".");
+          keys.forEach((key, index) => {
+            if (index === keys.length - 1) {
+              temp[key] = convertToCorrectType(value);
+            } else {
+              if (!temp[key]) temp[key] = {};
+              temp = convertToCorrectType(temp[key]);
+            }
+          });
+        })
+      );
     } else {
-      setConfigState((prev) => changeCb(prev));
+      setConfigState((prev) =>
+        produce(prev, (draft) => {
+          let temp = draft;
+          const keys = name.split(".");
+          keys.forEach((key, index) => {
+            if (index === keys.length - 1) {
+              temp[key] = convertToCorrectType(value);
+            } else {
+              if (!temp[key]) temp[key] = {};
+              temp = convertToCorrectType(temp[key]);
+            }
+          });
+        })
+      );
     }
   };
-
   const handleSkuChange = (e) => {
     const { name, value } = e.target;
     setSkuData((prev) => ({ ...prev, [name]: value }));

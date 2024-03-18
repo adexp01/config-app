@@ -45,7 +45,7 @@ const Header = (props) => {
     <div className="header" style={{ right: "0px" }}>
       {/* Logo */}
       <div className="header-left">
-        <Link to="/app/main/dashboard" className="logo">
+        <Link to="/" className="logo">
           <img src={headerlogo} width={40} height={40} alt="" />
         </Link>
       </div>

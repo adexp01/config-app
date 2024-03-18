@@ -41,7 +41,7 @@ export default class App extends Component {
     const { location, match, user } = this.props;
 
     if (location.pathname === "/") {
-      return <Redirect to={"/app/main/dashboard"} />;
+      return <Redirect to={"/app/employee/config"} />;
     }
     return (
       <Switch>
